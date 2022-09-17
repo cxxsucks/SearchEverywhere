@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/previewFailTxt">
+        <file>ax.md</file>
+        <file>noAx.md</file>
+    </qresource>
+</RCC>

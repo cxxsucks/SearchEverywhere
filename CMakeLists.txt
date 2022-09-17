@@ -13,9 +13,10 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS
-             Widgets LinguistTools)
+             Widgets LinguistTools Multimedia MultimediaWidgets)
 find_package(Qt6 REQUIRED COMPONENTS
-             Widgets LinguistTools)
+             Widgets LinguistTools Multimedia MultimediaWidgets)
+add_subdirectory(previewer)
 
 set(TS_FILES seev_zh_CN.ts)
 set(PROJECT_SOURCES
@@ -24,7 +25,7 @@ set(PROJECT_SOURCES
     widgets/oriepredselector.hpp widgets/oriepredselector.cpp widgets/oriepredselector.ui
     widgets/orieconfwidget.cpp widgets/orieconfwidget.hpp widgets/orieconfwidget.ui
     widgets/locatejobwidget.cpp widgets/locatejobwidget.hpp widgets/locatejobwidget.ui
-    util/fileinfomodel.cpp util/fileinfomodel.hpp
+    # util/fil
     ${TS_FILES}
 )
 
