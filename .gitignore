@@ -12,8 +12,6 @@ release
 Release
 x64
 
-./orient
 unused
 **/*tmpdir*
 CMakeSettings.json
-win_port/packages

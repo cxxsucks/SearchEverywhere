@@ -26,7 +26,7 @@ NavWidget::~NavWidget()
 {
     // Write seev configuration
     QJsonDocument seevConf = toJsonDoc();
-    QFile confStream(ui->confPathEdit->text());
+    QFile confStream(ui->seevConfPathBut->text());
     confStream.open(QIODeviceBase::WriteOnly);
     confStream.write(seevConf.toJson());
     delete ui;

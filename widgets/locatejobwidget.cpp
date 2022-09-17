@@ -1,4 +1,4 @@
-#include "locatejobwidget.h"
+#include "locatejobwidget.hpp"
 #include "ui_locatejobwidget.h"
 
 namespace seev {

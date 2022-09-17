@@ -1,4 +1,4 @@
-#include "navwidget.hpp"
+#include "widgets/navwidget.hpp"
 
 #include <QApplication>
 #include <QLocale>

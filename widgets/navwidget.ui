@@ -20,13 +20,6 @@
       <string>New Search</string>
      </property>
      <layout class="QGridLayout">
-      <item row="2" column="0" colspan="2">
-       <widget class="QPushButton" name="searchEditDlgBut">
-        <property name="text">
-         <string>Edit Search in a Separate Dialog...</string>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="2">
        <widget class="QCheckBox" name="showAdvChk">
         <property name="text">
@@ -34,15 +27,8 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0" colspan="2">
-       <widget class="QPushButton" name="initSearchBut">
-        <property name="text">
-         <string>Start Search</string>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="0" colspan="3">
-       <widget class="QWidget" name="predWidg" native="true">
+       <widget class="seev::OriePredSelector" name="predWidg" native="true">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -131,13 +117,34 @@
         </layout>
        </widget>
       </item>
+      <item row="2" column="0">
+       <widget class="QPushButton" name="initSearchBut">
+        <property name="text">
+         <string>Start Search</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="2">
+       <widget class="QPushButton" name="searchEditDlgBut">
+        <property name="text">
+         <string>Edit Search in a Separate Dialog...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="updateDbBut">
+        <property name="text">
+         <string>Scan Filesystem</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
    <item>
     <widget class="QLabel" name="__z2">
      <property name="text">
-      <string>Saved Searches</string>
+      <string>Saved Searches - Double Click to Load</string>
      </property>
      <property name="buddy">
       <cstring>savedSearchLst</cstring>
@@ -149,6 +156,14 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>seev::OriePredSelector</class>
+   <extends>QWidget</extends>
+   <header>widgets/oriepredselector.hpp</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

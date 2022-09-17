@@ -1,21 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <author/>
- <comment/>
- <exportmacro/>
  <class>seev::LocateJobWidget</class>
- <widget name="seev::LocateJobWidget" class="QWidget">
+ <widget class="QWidget" name="seev::LocateJobWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>316</width>
+    <height>474</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>New Search</string>
   </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QCheckBox" name="showSaveOptsChk">
+     <property name="text">
+      <string>Show Save Options</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2" rowspan="4">
+    <widget class="seev::Previewer" name="previewer" native="true"/>
+   </item>
+   <item row="0" column="1">
+    <widget class="QPushButton" name="editAgainBut">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>TODO: Edit &amp;&amp; Search Again</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" colspan="2">
+    <widget class="QGroupBox" name="saveBox">
+     <property name="title">
+      <string>GroupBox</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QPushButton" name="saveBut">
+        <property name="text">
+         <string>Save</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPushButton" name="browseIconBut">
+        <property name="text">
+         <string>Browse Icon</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="z">
+        <property name="text">
+         <string>Custom Name:</string>
+        </property>
+        <property name="buddy">
+         <cstring>saveNameEdit</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="saveNameEdit">
+        <property name="text">
+         <string>New Search</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <widget class="QListView" name="locateResLst"/>
+   </item>
+   <item row="3" column="0" colspan="2">
+    <widget class="QPushButton" name="infoDispBut">
+     <property name="text">
+      <string>Details will be Shown Here
+After Clicking Result Table.
+Click here again to open it.</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
- <pixmapfunction/>
- <connections/>
+ <customwidgets>
+  <customwidget>
+   <class>seev::Previewer</class>
+   <extends>QWidget</extends>
+   <header>previewer/previewer.hpp</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>showSaveOptsChk</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>saveBox</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>40</x>
+     <y>20</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>36</x>
+     <y>83</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>saveNameEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>seev::LocateJobWidget</receiver>
+   <slot>setWindowTitle(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>229</x>
+     <y>110</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>291</x>
+     <y>132</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>setWindowIcon(QIcon)</slot>
+ </slots>
 </ui>
