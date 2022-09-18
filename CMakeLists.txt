@@ -13,9 +13,9 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 REQUIRED COMPONENTS
-             Widgets LinguistTools Multimedia MultimediaWidgets)
+             Widgets LinguistTools)
 find_package(Qt6 REQUIRED COMPONENTS
-             Widgets LinguistTools Multimedia MultimediaWidgets)
+             Widgets LinguistTools)
 add_subdirectory(previewer)
 
 set(TS_FILES seev_zh_CN.ts)
@@ -25,7 +25,8 @@ set(PROJECT_SOURCES
     widgets/oriepredselector.hpp widgets/oriepredselector.cpp widgets/oriepredselector.ui
     widgets/orieconfwidget.cpp widgets/orieconfwidget.hpp widgets/orieconfwidget.ui
     widgets/locatejobwidget.cpp widgets/locatejobwidget.hpp widgets/locatejobwidget.ui
-    # util/fil
+    widgets/startpathconfwidget.ui
+    util/fileinfomodel.cpp util/fileinfomodel.hpp
     ${TS_FILES}
 )
 
@@ -36,7 +37,7 @@ qt_add_executable(seev MANUAL_FINALIZATION ${PROJECT_SOURCES})
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 target_link_libraries(
-    seev PRIVATE Qt6::Widgets orie
+    seev PRIVATE Qt6::Widgets orie pcre2-8 previewer
 )
 
 set_target_properties(seev PROPERTIES

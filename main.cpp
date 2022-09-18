@@ -1,8 +1,10 @@
 #include "widgets/navwidget.hpp"
 
+#include <QTabWidget>
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
+#include <QFileInfo>
 
 int main(int argc, char *argv[])
 {
@@ -17,7 +19,20 @@ int main(int argc, char *argv[])
             break;
         }
     }
-    seev::NavWidget w;
-    w.show();
-    return a.exec();
+    qRegisterMetaType<QFileInfo>("QFileInfo");
+
+    QTabWidget tabw;
+    seev::NavWidget navw;
+    tabw.addTab(&navw, QObject::tr("Home Page"));
+    tabw.setTabsClosable(true);
+    QObject::connect(&tabw, &QTabWidget::tabCloseRequested, 
+        [&tabw] (int i) { if (i >= 1) delete tabw.widget(i); });
+
+    tabw.show();
+    QObject::connect(&navw, &seev::NavWidget::seevWidgetCreated,
+        [&tabw] (QWidget* w) { tabw.addTab(w, w->windowIcon(), w->windowTitle()); });
+    int ret = a.exec();
+    while (tabw.count() > 1)
+        delete tabw.widget(1);
+    return ret;
 }

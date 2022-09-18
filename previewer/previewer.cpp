@@ -1,4 +1,4 @@
-#include "previewer.h"
+#include "previewer.hpp"
 #include "ui_previewer.h"
 
 #include "imagePreviewer/imagepreviewer.h"
@@ -20,6 +20,7 @@
 #include <QtGui/QFileSystemModel>
 #include <QtWidgets/QTreeView>
 
+namespace seev {
 Previewer::Previewer(QWidget *parent, const QString& soffice,bool hasOpen)
     : QWidget(parent), ui(new Ui::Previewer), m_sofficePath(soffice)
 {
@@ -249,4 +250,6 @@ void Previewer::onCopyFilePathClicked() {
 void Previewer::onCopyDirPathClicked() {
     QFileInfo info(m_viewingPath);
     QGuiApplication::clipboard()->setText(info.canonicalFilePath());
+}
+
 }

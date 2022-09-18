@@ -22,7 +22,7 @@ public:
     void selectedPreviewPath();
 
 private:
-    Ui::Previewer *ui;
+    ::Ui::Previewer *ui;
     QString m_viewingPath;
     QString m_sofficePath;
     QFutureWatcher<int> m_officePreviewFut;

@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(PREVIEWER_SRC 
-    previewer.cpp previewer.h previewer.ui
+    previewer.cpp previewer.hpp previewer.ui
     imagePreviewer/imagepreviewer.cpp
     imagePreviewer/imagepreviewer.h
     previewFailTxt/previewFailTxt.qrc

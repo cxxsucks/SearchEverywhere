@@ -79,6 +79,21 @@
     </widget>
    </item>
    <item>
+    <widget class="QGroupBox" name="condModifBox">
+     <property name="title">
+      <string>CondModifBox</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QWidget" name="lhsPredWidg" native="true"/>
+      </item>
+      <item>
+       <widget class="QWidget" name="rhsPredWidg" native="true"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <widget class="QGroupBox" name="pathMatchBox">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
