@@ -18,6 +18,8 @@ public:
     ~Previewer();
 
     QString previewPath() const {return m_viewingPath;}
+
+public slots:
     void setPreviewPath(const QString& path);
     void selectedPreviewPath();
 

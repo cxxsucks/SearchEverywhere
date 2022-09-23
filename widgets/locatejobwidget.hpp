@@ -26,24 +26,23 @@ public:
 
     QJsonObject toJson() const;
 
-public slots:
-    void locateMore(size_t threshold);
-
 signals:
     void saveRequested(const QJsonObject&);
     // `private` signal; for bringing async locate result to GUI thread
     void resultYielded(const QFileInfo&);
 
 private slots:
-    void onResmdlSelected(const QModelIndex& mdl);
+    void onResmdlClicked(const QModelIndex& mdl);
     void onScroll(int value);
     void onIcoPathSel();
 
 private:
     Ui::LocateJobWidget *ui;
     FileinfoModel* m_resMdl;
+
     orie::app& m_orieApp;
     orie::app::job_list m_jobList;
+    std::unique_ptr<orie::fsearch_expr> m_expr;
 };
 
 

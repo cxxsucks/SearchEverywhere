@@ -5,6 +5,8 @@
 #include <orient/fs_pred_tree/fs_expr_builder.hpp>
 #include <QtCore/QJsonObject>
 #include <QtWidgets/QMessageBox>
+#include <QtWidgets/QScrollBar>
+#include <QtWidgets/QFileIconProvider>
 
 namespace seev {
 
@@ -12,6 +14,7 @@ LocateJobWidget::LocateJobWidget(const QJsonObject& obj, orie::app &app, QWidget
     : LocateJobWidget(obj[QStringLiteral("command")].toString(), app, parent)
 {
     ui->browseIconBut->setIcon(QIcon(obj[QStringLiteral("iconPath")].toString()));
+    setWindowIcon(ui->browseIconBut->icon());
     ui->saveNameEdit->setText(obj[QStringLiteral("description")].toString(tr("New Search")));
 }
 
@@ -21,14 +24,20 @@ LocateJobWidget::LocateJobWidget(const QString& cmd, orie::app &app, QWidget *pa
 {
     ui->setupUi(this);
     ui->locateResLst->setModel(m_resMdl);
+    ui->locateResLst->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
+    ui->locateResLst->horizontalHeader()->setSectionResizeMode(1, QHeaderView::ResizeToContents);
+    ui->locateResLst->horizontalHeader()->setSectionResizeMode(2, QHeaderView::ResizeToContents);
 
-    connect(this, &LocateJobWidget::resultYielded, 
-            m_resMdl, &FileinfoModel::addInfo);
+    connect(this, &LocateJobWidget::resultYielded, m_resMdl, &FileinfoModel::addInfo);
+    connect(ui->locateResLst->verticalScrollBar(), &QScrollBar::valueChanged,
+            this, &LocateJobWidget::onScroll);
+    connect(ui->locateResLst, &QTableView::clicked, this, &LocateJobWidget::onResmdlClicked);
 
     try {
         // TODO: Prevent the usage of -[f]print[f], -exec, -delete
         auto builder = orie::pred_tree::fs_expr_builder();
         builder.build(cmd.toStdString());
+        m_expr.reset(builder.release());
         if (app.start_paths().size() == 0) {
             QMessageBox::critical(this, tr("No Starting Paths?"),
                 tr("No starting paths. Cannot proceed. Add one in Home Page"));
@@ -36,7 +45,7 @@ LocateJobWidget::LocateJobWidget(const QString& cmd, orie::app &app, QWidget *pa
         }
 
         size_t jobSize = 20 / app.start_paths().size() + 1;
-        m_jobList = m_orieApp.get_jobs(*builder.release(), 
+        m_jobList = m_orieApp.get_jobs(*m_expr,
             [this] (bool isAsync, orie::fs_data_iter& it) {
                 QFileInfo resInfo(QString::fromStdString(it.path()));
                 if (isAsync)
@@ -60,16 +69,49 @@ QJsonObject LocateJobWidget::toJson() const {
     return QJsonObject();
 }
 
-void LocateJobWidget::locateMore(size_t threshold) {
+void LocateJobWidget::onResmdlClicked(const QModelIndex &mdl) {
+    if (m_resMdl->rowCount() == 0)
+        return;
+    const qsizetype r = mdl.row() >= m_resMdl->rowCount() ?
+                        m_resMdl->rowCount() - 1 : mdl.row();
+    const QFileInfo &info = m_resMdl->at(r);
+    ui->previewer->setPreviewPath(info.absoluteFilePath());
 
-}
+    // Display file icon in the displaying button
+    const QSize butS = ui->infoDispBut->size();
+    ui->infoDispBut->setIcon(QFileIconProvider().icon(info));
+    ui->infoDispBut->setIconSize(QSize(
+        butS.height() * 0.7, butS.height() * 0.7
+    ));
 
-void LocateJobWidget::onResmdlSelected(const QModelIndex &mdl) {
+    // Set descriptive text
+    QString ap = info.absolutePath(), fn = info.fileName();
+    int dispWidth = butS.width() * 0.7;
+    QFont dispFont = ui->infoDispBut->font();
+    QFontMetrics dispMetrics(dispFont);
+    ap = dispMetrics.elidedText(tr("Folder: ") + ap, Qt::ElideLeft, dispWidth);
+    fn = dispMetrics.elidedText(tr("Name: ") + fn, Qt::ElideLeft, dispWidth);
 
+    ui->infoDispBut->setText(tr( "%1\nSize: %2\n%3\nTimeModified: %4")
+        .arg(fn, QString::number(info.size()), ap,
+             info.lastModified().toString(tr("dd-MM-yyyy hh:mm"))));
 }
 
 void LocateJobWidget::onScroll(int value) {
+    if (value <= ui->locateResLst->verticalScrollBar()->maximum() * 0.95 ||
+        m_orieApp.start_paths().size() <= 0)
+        return;
 
+    size_t jobSize = 20 / m_orieApp.start_paths().size() + 1;
+    for (auto& datJobPair : m_jobList) {
+        datJobPair.second->start(m_orieApp._pool, 
+            [this] (bool isAsync, orie::fs_data_iter& it) {
+                QFileInfo resInfo(QString::fromStdString(it.path()));
+                if (isAsync)
+                    emit resultYielded(resInfo);
+                else m_resMdl->addInfo(resInfo);
+            }, jobSize, jobSize);
+    }
 }
 
 void LocateJobWidget::onIcoPathSel() {
