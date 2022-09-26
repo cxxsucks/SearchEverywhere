@@ -18,7 +18,6 @@ find_package(Qt6 REQUIRED COMPONENTS
              Widgets LinguistTools)
 add_subdirectory(previewer)
 
-set(TS_FILES seev_zh_CN.ts)
 set(PROJECT_SOURCES
     main.cpp
     widgets/navwidget.cpp widgets/navwidget.hpp widgets/navwidget.ui
@@ -27,7 +26,6 @@ set(PROJECT_SOURCES
     widgets/locatejobwidget.cpp widgets/locatejobwidget.hpp widgets/locatejobwidget.ui
     widgets/startpathconfwidget.ui
     util/fileinfomodel.cpp util/fileinfomodel.hpp
-    ${TS_FILES}
 )
 
 qt_add_executable(seev MANUAL_FINALIZATION ${PROJECT_SOURCES})
@@ -35,7 +33,7 @@ qt_add_executable(seev MANUAL_FINALIZATION ${PROJECT_SOURCES})
 #    set_property(TARGET seev APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
-qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+qt_add_translations(seev TS_FILES seev_zh_CN.ts)
 target_link_libraries(
     seev PRIVATE Qt6::Widgets orie pcre2-8 previewer
 )
