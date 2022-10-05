@@ -26,8 +26,13 @@ private:
     QString __genPathCommand() const;
     QString __genContCommand() const;
     QString __genFileStatCommand() const;
-    QString __genModifCommand(const QString& modifName) const;
-    QString __genBridgeCommand(const QString& bridName) const;
+    QString __genAccessCommand() const;
+    QString __genFileTypeCommand() const;
+    QString __genModifCommand(QString modifName) const;
+    QString __genBridgeCommand(QString bridName) const;
+
+private slots:
+    void onPredKindChange(int index);
 };
 
 
