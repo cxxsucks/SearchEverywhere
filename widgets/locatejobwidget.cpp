@@ -3,25 +3,29 @@
 #include "../util/fileinfomodel.hpp"
 
 #include <orient/fs_pred_tree/fs_expr_builder.hpp>
+#include <QtCore/QDebug>
 #include <QtCore/QJsonObject>
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QScrollBar>
 #include <QtWidgets/QFileIconProvider>
+#include <QtWidgets/QFileDialog>
 
 namespace seev {
 
 LocateJobWidget::LocateJobWidget(const QJsonObject& obj, orie::app &app, QWidget *parent)
     : LocateJobWidget(obj[QStringLiteral("command")].toString(), app, parent)
 {
-    ui->browseIconBut->setIcon(QIcon(obj[QStringLiteral("iconPath")].toString()));
+    m_iconPath = obj["iconPath"].toString();
+    ui->browseIconBut->setIcon(QIcon(m_iconPath));
     setWindowIcon(ui->browseIconBut->icon());
-    ui->saveNameEdit->setText(obj[QStringLiteral("description")].toString(tr("New Search")));
+    ui->saveNameEdit->setText(obj["description"].toString(tr("New Search")));
 }
 
 LocateJobWidget::LocateJobWidget(const QString& cmd, orie::app &app, QWidget *parent)
     : QWidget(parent), ui(new Ui::LocateJobWidget)
-    , m_orieApp(app), m_resMdl(new FileinfoModel)
+    , m_orieApp(app), m_resMdl(new FileinfoModel), m_command(cmd)
 {
+    qDebug() << m_command;
     ui->setupUi(this);
     ui->locateResLst->setModel(m_resMdl);
     ui->locateResLst->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
@@ -32,6 +36,9 @@ LocateJobWidget::LocateJobWidget(const QString& cmd, orie::app &app, QWidget *pa
     connect(ui->locateResLst->verticalScrollBar(), &QScrollBar::valueChanged,
             this, &LocateJobWidget::onScroll);
     connect(ui->locateResLst, &QTableView::clicked, this, &LocateJobWidget::onResmdlClicked);
+    connect(ui->browseIconBut, &QPushButton::clicked, this, &LocateJobWidget::onIcoPathSel);
+    connect(ui->saveBut, &QPushButton::clicked, this, 
+            [this] () { saveRequested(toJson()); });
 
     try {
         // TODO: Prevent the usage of -[f]print[f], -exec, -delete
@@ -66,7 +73,11 @@ LocateJobWidget::~LocateJobWidget() {
 }
 
 QJsonObject LocateJobWidget::toJson() const {
-    return QJsonObject();
+    QJsonObject res;
+    res["command"] = m_command;
+    res["iconPath"] = m_iconPath;
+    res["description"] = windowTitle();
+    return res;
 }
 
 void LocateJobWidget::onResmdlClicked(const QModelIndex &mdl) {
@@ -115,7 +126,15 @@ void LocateJobWidget::onScroll(int value) {
 }
 
 void LocateJobWidget::onIcoPathSel() {
+    QString confPath = QFileDialog::getOpenFileName(
+        this, tr("Select Icon"), QDir::currentPath(),
+        tr("Images (*.png *.xpm *.jpg);;All Files (*)"));
+    if (confPath.isEmpty())
+        return;
 
+    m_iconPath = std::move(confPath);
+    ui->browseIconBut->setIcon(QIcon(m_iconPath));
+    setWindowIcon(ui->browseIconBut->icon());
 }
 
 } // namespace seev

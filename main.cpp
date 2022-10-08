@@ -31,6 +31,8 @@ int main(int argc, char *argv[])
     tabw.show();
     QObject::connect(&navw, &seev::NavWidget::seevWidgetCreated,
         [&tabw] (QWidget* w) { tabw.addTab(w, w->windowIcon(), w->windowTitle()); });
+    QObject::connect(&navw, &seev::NavWidget::seevWidgetCreated,
+                     &tabw, &QTabWidget::setCurrentWidget);
     int ret = a.exec();
     while (tabw.count() > 1)
         delete tabw.widget(1);

@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QJsonArray>
 #include <orient/app.hpp>
+class QJsonObject;
 
 namespace seev {
 
@@ -14,8 +15,10 @@ class NavWidget : public QWidget
     Q_OBJECT
 
 public slots:
-    void fromJsonDoc(const QJsonDocument& doc);
+    void fromJsonObj(const QJsonObject& obj);
     void setSeevConfPath(const QString& path);
+    void addSavedSearch(const QJsonObject& obj);
+    void eraseSavedSearch(int idx);
 
 public:
     QJsonObject toJsonObj() const;

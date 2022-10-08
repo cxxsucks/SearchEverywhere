@@ -36,13 +36,23 @@ NavWidget::NavWidget(QWidget *parent)
             &NavWidget::showSearchDlg);
 
     connect(ui->savedSearchLst, &QListWidget::doubleClicked, this,
-        [this] (const QModelIndex& idx) { emit seevWidgetCreated(new LocateJobWidget(
+        [this] (const QModelIndex& idx) { 
+            LocateJobWidget* jobw = new LocateJobWidget(
                 m_savedSearches.at(idx.column()).toObject(), m_orieApp
-        )); });
+            );
+            connect(jobw, &LocateJobWidget::saveRequested,
+                    this, &NavWidget::addSavedSearch);
+            emit seevWidgetCreated(jobw);
+        });
     connect(ui->initSearchBut, &QPushButton::clicked, this,
-        [this] () { emit seevWidgetCreated(new LocateJobWidget(
-            ui->predWidg->genCommand(), m_orieApp
-        )); });
+        [this] () { 
+            LocateJobWidget* jobw = new LocateJobWidget(
+                ui->predWidg->genCommand(), m_orieApp
+            );
+            connect(jobw, &LocateJobWidget::saveRequested,
+                    this, &NavWidget::addSavedSearch);
+            emit seevWidgetCreated(jobw);
+        });
 
     connect(ui->seevConfPathEdit, &QLineEdit::returnPressed, this,
         [this] () {setSeevConfPath(ui->seevConfPathEdit->text());});
@@ -52,6 +62,8 @@ NavWidget::NavWidget(QWidget *parent)
         [this] () { emit seevWidgetCreated(new OrieConfWidget(
             QString::fromStdString(m_orieApp.conf_path())));
         });
+    connect(ui->delSavedSearchBut, &QPushButton::clicked,
+        [this] () { eraseSavedSearch(ui->savedSearchLst->currentRow()); });
 
     // Always launch with default seev configuration path
     setSeevConfPath(seevDefaultConfPath);
@@ -60,8 +72,8 @@ NavWidget::NavWidget(QWidget *parent)
         .start_auto_update(std::chrono::seconds(ui->updIntSpin->value()));
 }
 
-void NavWidget::fromJsonDoc(const QJsonDocument& doc) {
-    QString orieConfPath = doc["orieConfPath"].toString(orieDefaultConfPath);
+void NavWidget::fromJsonObj(const QJsonObject& obj) {
+    QString orieConfPath = obj["orieConfPath"].toString(orieDefaultConfPath);
     // Write default configuration if the specified orie conf file does not exist
     if (!m_orieApp.read_conf(orieConfPath.toStdString())) {
         m_orieApp = orie::app::os_default(m_pool);
@@ -69,15 +81,35 @@ void NavWidget::fromJsonDoc(const QJsonDocument& doc) {
         m_orieApp.write_conf(orieConfPath.toStdString());
     }
 
-    m_savedSearches = doc["savedSearches"].toArray();
+    // When possible, index with char* instead of QString
     ui->savedSearchLst->clear();
-    for (const QJsonValueRef& val : m_savedSearches) {
-        ui->savedSearchLst->addItem(new QListWidgetItem(
-            QIcon(val[QStringLiteral("iconPath")].toString()),
-            val[QStringLiteral("description")].toString()
-        ));
+    m_savedSearches = QJsonArray();
+    for (const QJsonValueRef& val : obj["savedSearches"].toArray()) {
+        if (!val.isObject())
+            continue;
+        addSavedSearch(val.toObject());
     }
-    ui->updIntSpin->setValue(doc[QStringLiteral("updateDbInterval")].toInt(3600));
+    ui->updIntSpin->setValue(obj["updateDbInterval"].toInt(3600));
+}
+
+void NavWidget::addSavedSearch(const QJsonObject& obj) {
+    m_savedSearches.append(obj);
+    ui->savedSearchLst->addItem(new QListWidgetItem(
+        QIcon(obj["iconPath"].toString()),
+        obj["description"].toString()
+    ));
+}
+
+void NavWidget::eraseSavedSearch(int idx) {
+    if (idx < 0 || idx >= ui->savedSearchLst->count())
+        return;
+    if (QMessageBox::warning(this, tr("Are you sure?"), 
+            tr("Are you sure to remove selected search?"), 
+            QMessageBox::Ok, QMessageBox::Cancel) != QMessageBox::Ok)
+        return;
+
+    m_savedSearches.removeAt(idx);
+    delete ui->savedSearchLst->item(idx);
 }
 
 void NavWidget::setSeevConfPath(const QString &path) {
@@ -87,15 +119,14 @@ void NavWidget::setSeevConfPath(const QString &path) {
     QFile confStream(path);
     confStream.open(QIODeviceBase::ReadOnly);
     // Set the internals 
-    fromJsonDoc(QJsonDocument::fromJson(confStream.readAll()));
+    fromJsonObj(QJsonDocument::fromJson(confStream.readAll()).object());
 }
 
 QJsonObject NavWidget::toJsonObj() const {
     QJsonObject res;
-    res[QStringLiteral("savedSearches")] = m_savedSearches;
-    res[QStringLiteral("orieConfPath")] =
-        QString::fromStdString(m_orieApp.conf_path());
-    res[QStringLiteral("updateDbInterval")] = ui->updIntSpin->value();
+    res["savedSearches"] = m_savedSearches;
+    res["orieConfPath"] = QString::fromStdString(m_orieApp.conf_path());
+    res["updateDbInterval"] = ui->updIntSpin->value();
     return res;
 }
 

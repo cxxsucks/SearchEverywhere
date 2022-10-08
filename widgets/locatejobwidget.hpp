@@ -13,8 +13,7 @@ namespace Ui {
 class LocateJobWidget;
 }
 
-class LocateJobWidget : public QWidget
-{
+class LocateJobWidget : public QWidget {
     Q_OBJECT
 
 public:
@@ -43,6 +42,9 @@ private:
     orie::app& m_orieApp;
     orie::app::job_list m_jobList;
     std::unique_ptr<orie::fsearch_expr> m_expr;
+
+    QString m_command;
+    QString m_iconPath;
 };
 
 
