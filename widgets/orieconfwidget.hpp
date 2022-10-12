@@ -21,6 +21,7 @@ class OrieConfWidget : public QWidget
 
 public slots:
     void writeConfFile() const;
+    void readConfFile(const QString& orieConfPath);
 
 public:
     explicit OrieConfWidget(const QString& orieConfPath,
@@ -29,6 +30,7 @@ public:
 
 private:
     Ui::OrieConfWidget *ui;
+    QString m_confPath;
 };
 
 class StartPathConfDialog : public QDialog
@@ -43,6 +45,10 @@ public:
 private:
     Ui::StartPathConfWidget *ui;
     orie::app& m_orieApp;
+
+private slots:
+    void onAddClicked();
+    void onEraseClicked();
 };
 
 } // namespace seev
