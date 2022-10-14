@@ -142,22 +142,6 @@
  <connections>
   <connection>
    <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>seev::OrieConfWidget</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>353</x>
-     <y>701</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>321</x>
-     <y>661</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
    <signal>accepted()</signal>
    <receiver>seev::OrieConfWidget</receiver>
    <slot>writeConfFile()</slot>
@@ -169,22 +153,6 @@
     <hint type="destinationlabel">
      <x>219</x>
      <y>667</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>seev::OrieConfWidget</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>376</x>
-     <y>696</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>386</x>
-     <y>660</y>
     </hint>
    </hints>
   </connection>

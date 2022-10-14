@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/qss">
+        <file>seev.qss</file>
+        <file>qss_img/checkbox.png</file>
+        <file>qss_img/down.png</file>
+        <file>qss_img/left.png</file>
+        <file>qss_img/right.png</file>
+        <file>qss_img/up.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>search_img/c.png</file>
+        <file>search_img/zip.png</file>
+        <file>search_img/music.png</file>
+        <file>search_img/doc.png</file>
+        <file>search_img/git.png</file>
+    </qresource>
+</RCC>

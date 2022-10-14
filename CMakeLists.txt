@@ -26,6 +26,7 @@ set(PROJECT_SOURCES
     widgets/locatejobwidget.cpp widgets/locatejobwidget.hpp widgets/locatejobwidget.ui
     widgets/startpathconfwidget.ui
     util/fileinfomodel.cpp util/fileinfomodel.hpp
+    assets/seev_rsc.qrc
 )
 
 qt_add_executable(seev MANUAL_FINALIZATION ${PROJECT_SOURCES})
