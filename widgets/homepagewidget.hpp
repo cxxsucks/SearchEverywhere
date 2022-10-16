@@ -8,10 +8,9 @@ class QJsonObject;
 
 namespace seev {
 
-namespace Ui { class NavWidget; }
+namespace Ui { class HomePageWidget; }
 
-class NavWidget : public QWidget
-{
+class HomePageWidget : public QWidget {
     Q_OBJECT
 
 public slots:
@@ -22,14 +21,14 @@ public slots:
 
 public:
     QJsonObject toJsonObj() const;
-    NavWidget(QWidget *parent = nullptr);
-    ~NavWidget();
+    HomePageWidget(QWidget *parent = nullptr);
+    ~HomePageWidget();
 
 signals:
     void seevWidgetCreated(QWidget*);
 
 private:
-    Ui::NavWidget *ui;
+    Ui::HomePageWidget *ui;
     orie::fifo_thpool m_pool;
     orie::app m_orieApp;
 

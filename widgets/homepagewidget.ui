@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>seev::NavWidget</class>
- <widget class="QWidget" name="seev::NavWidget">
+ <class>seev::HomePageWidget</class>
+ <widget class="QWidget" name="seev::HomePageWidget">
   <property name="geometry">
    <rect>
     <x>0</x>

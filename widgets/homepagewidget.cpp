@@ -1,8 +1,8 @@
-#include "navwidget.hpp"
+#include "homepagewidget.hpp"
 #include "orieconfwidget.hpp"
 #include "locatejobwidget.hpp"
 #include "oriepredselector.hpp"
-#include "./ui_navwidget.h"
+#include "./ui_homepagewidget.h"
 
 #include <QtCore/QFile>
 #include <QtCore/QJsonDocument>
@@ -13,13 +13,13 @@
 
 namespace seev {
 
-QString NavWidget::seevDefaultConfPath = 
+QString HomePageWidget::seevDefaultConfPath = 
     QString(::getenv("HOME")) + "/.config/orie/seev_default.txt";
-QString NavWidget::orieDefaultConfPath = 
+QString HomePageWidget::orieDefaultConfPath = 
     QString(::getenv("HOME")) + "/.config/orie/default.txt";
 
-NavWidget::NavWidget(QWidget *parent)
-    : QWidget(parent), ui(new Ui::NavWidget)
+HomePageWidget::HomePageWidget(QWidget *parent)
+    : QWidget(parent), ui(new Ui::HomePageWidget)
     , m_orieApp(m_pool), m_lastUpdateTime(::time(nullptr))
 {
     ui->setupUi(this);
@@ -27,13 +27,13 @@ NavWidget::NavWidget(QWidget *parent)
     ui->advOptBox->setHidden(true);
 
     connect(ui->updateDbBut, &QPushButton::clicked, this, 
-            &NavWidget::updateDbButClicked);
+            &HomePageWidget::updateDbButClicked);
     connect(ui->typeOrieCmdBut, &QPushButton::clicked, this, 
-            &NavWidget::typeOrieCmdButClicked);
+            &HomePageWidget::typeOrieCmdButClicked);
     connect(ui->seevConfPathBut, &QPushButton::clicked, this,
-            &NavWidget::selSeevConfButClicked);
+            &HomePageWidget::selSeevConfButClicked);
     connect(ui->searchEditDlgBut, &QPushButton::clicked, this,
-            &NavWidget::showSearchDlg);
+            &HomePageWidget::showSearchDlg);
 
     connect(ui->savedSearchLst, &QListWidget::doubleClicked, this,
         [this] (const QModelIndex& idx) { 
@@ -41,7 +41,7 @@ NavWidget::NavWidget(QWidget *parent)
                 m_savedSearches.at(idx.column()).toObject(), m_orieApp
             );
             connect(jobw, &LocateJobWidget::saveRequested,
-                    this, &NavWidget::addSavedSearch);
+                    this, &HomePageWidget::addSavedSearch);
             emit seevWidgetCreated(jobw);
         });
     connect(ui->initSearchBut, &QPushButton::clicked, this,
@@ -50,7 +50,7 @@ NavWidget::NavWidget(QWidget *parent)
                 ui->predWidg->genCommand(), m_orieApp
             );
             connect(jobw, &LocateJobWidget::saveRequested,
-                    this, &NavWidget::addSavedSearch);
+                    this, &HomePageWidget::addSavedSearch);
             emit seevWidgetCreated(jobw);
         });
 
@@ -72,7 +72,7 @@ NavWidget::NavWidget(QWidget *parent)
         .start_auto_update(std::chrono::seconds(ui->updIntSpin->value()));
 }
 
-void NavWidget::fromJsonObj(const QJsonObject& obj) {
+void HomePageWidget::fromJsonObj(const QJsonObject& obj) {
     QString orieConfPath = obj["orieConfPath"].toString(orieDefaultConfPath);
     // Write default configuration if the specified orie conf file does not exist
     if (!m_orieApp.read_conf(orieConfPath.toStdString())) {
@@ -92,7 +92,7 @@ void NavWidget::fromJsonObj(const QJsonObject& obj) {
     ui->updIntSpin->setValue(obj["updateDbInterval"].toInt(3600));
 }
 
-void NavWidget::addSavedSearch(const QJsonObject& obj) {
+void HomePageWidget::addSavedSearch(const QJsonObject& obj) {
     m_savedSearches.append(obj);
     ui->savedSearchLst->addItem(new QListWidgetItem(
         QIcon(obj["iconPath"].toString()),
@@ -100,7 +100,7 @@ void NavWidget::addSavedSearch(const QJsonObject& obj) {
     ));
 }
 
-void NavWidget::eraseSavedSearch(int idx) {
+void HomePageWidget::eraseSavedSearch(int idx) {
     if (idx < 0 || idx >= ui->savedSearchLst->count())
         return;
     if (QMessageBox::warning(this, tr("Are you sure?"), 
@@ -112,7 +112,7 @@ void NavWidget::eraseSavedSearch(int idx) {
     delete ui->savedSearchLst->item(idx);
 }
 
-void NavWidget::setSeevConfPath(const QString &path) {
+void HomePageWidget::setSeevConfPath(const QString &path) {
     ui->seevConfPathEdit->setText(path);
 
     // Read the seev configuration
@@ -122,7 +122,7 @@ void NavWidget::setSeevConfPath(const QString &path) {
     fromJsonObj(QJsonDocument::fromJson(confStream.readAll()).object());
 }
 
-QJsonObject NavWidget::toJsonObj() const {
+QJsonObject HomePageWidget::toJsonObj() const {
     QJsonObject res;
     res["savedSearches"] = m_savedSearches;
     res["orieConfPath"] = QString::fromStdString(m_orieApp.conf_path());
@@ -130,7 +130,7 @@ QJsonObject NavWidget::toJsonObj() const {
     return res;
 }
 
-NavWidget::~NavWidget()
+HomePageWidget::~HomePageWidget()
 {
     // Write seev configuration
     QJsonDocument seevConf;
@@ -141,7 +141,7 @@ NavWidget::~NavWidget()
     delete ui;
 }
 
-void NavWidget::updateDbButClicked() {
+void HomePageWidget::updateDbButClicked() {
     time_t nowClk = ::time(nullptr);
     if (nowClk < m_lastUpdateTime + 10) {
         QMessageBox::warning(this, tr("Scan Too Frequent"),
@@ -155,7 +155,7 @@ void NavWidget::updateDbButClicked() {
     m_orieApp.start_auto_update(std::chrono::seconds(ui->updIntSpin->value()));
 }
 
-void NavWidget::typeOrieCmdButClicked() {
+void HomePageWidget::typeOrieCmdButClicked() {
     if (ui->orieCmdEdit->isHidden()) {
         ui->orieCmdEdit->setHidden(false);
         ui->typeOrieCmdBut->setText(tr("Search with this command"));
@@ -171,7 +171,7 @@ void NavWidget::typeOrieCmdButClicked() {
     ui->orieCmdEdit->setHidden(true);
 }
 
-void NavWidget::selSeevConfButClicked() {
+void HomePageWidget::selSeevConfButClicked() {
     QString confPath = QFileDialog::getOpenFileName(
         this, tr("Select seev Conf File"), QDir::currentPath());
     if (confPath.isEmpty())
@@ -180,7 +180,7 @@ void NavWidget::selSeevConfButClicked() {
     setSeevConfPath(confPath);
 }
 
-void NavWidget::showSearchDlg() {
+void HomePageWidget::showSearchDlg() {
     QDialog exprEditDlg(this);
     auto editing = ui->predWidg;
     ui->newSearchLayout->removeWidget(editing);

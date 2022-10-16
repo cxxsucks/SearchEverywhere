@@ -1,4 +1,4 @@
-#include "widgets/navwidget.hpp"
+#include "widgets/homepagewidget.hpp"
 
 #include <QTabWidget>
 #include <QApplication>
@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     qRegisterMetaType<QFileInfo>("QFileInfo");
 
     QTabWidget tabw;
-    seev::NavWidget navw;
+    seev::HomePageWidget navw;
     tabw.addTab(&navw, QObject::tr("Home Page"));
     tabw.setTabsClosable(true);
     tabw.resize(600 * 1.618, 600); // :D
@@ -36,9 +36,9 @@ int main(int argc, char *argv[])
 
     QObject::connect(&tabw, &QTabWidget::tabCloseRequested, 
         [&tabw] (int i) { if (i >= 1) delete tabw.widget(i); });
-    QObject::connect(&navw, &seev::NavWidget::seevWidgetCreated,
+    QObject::connect(&navw, &seev::HomePageWidget::seevWidgetCreated,
         [&tabw] (QWidget* w) { tabw.addTab(w, w->windowIcon(), w->windowTitle()); });
-    QObject::connect(&navw, &seev::NavWidget::seevWidgetCreated,
+    QObject::connect(&navw, &seev::HomePageWidget::seevWidgetCreated,
                      &tabw, &QTabWidget::setCurrentWidget);
     int ret = a.exec();
     while (tabw.count() > 1)

@@ -20,7 +20,7 @@ add_subdirectory(previewer)
 
 set(PROJECT_SOURCES
     main.cpp
-    widgets/navwidget.cpp widgets/navwidget.hpp widgets/navwidget.ui
+    widgets/homepagewidget.cpp widgets/homepagewidget.hpp widgets/homepagewidget.ui
     widgets/oriepredselector.hpp widgets/oriepredselector.cpp widgets/oriepredselector.ui
     widgets/orieconfwidget.cpp widgets/orieconfwidget.hpp widgets/orieconfwidget.ui
     widgets/locatejobwidget.cpp widgets/locatejobwidget.hpp widgets/locatejobwidget.ui
