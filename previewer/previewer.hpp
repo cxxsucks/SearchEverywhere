@@ -22,6 +22,7 @@ public:
 public slots:
     void setPreviewPath(const QString& path);
     void selectedPreviewPath();
+    void clearPreview();
 
 private:
     ::Ui::Previewer *ui;

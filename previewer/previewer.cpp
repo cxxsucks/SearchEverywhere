@@ -2,7 +2,7 @@
 #include "ui_previewer.h"
 
 #include "imagePreviewer/imagepreviewer.h"
-#ifdef _ORIEA_PREVIEW_MEDIA
+#ifdef _SEEV_PREVIEW_MEDIA
 #include "mediaPreviewer/mediapreviewer.h"
 #endif
 
@@ -42,7 +42,17 @@ Previewer::Previewer(QWidget *parent, const QString& soffice,bool hasOpen)
             this, &Previewer::_office_cvtFinish);
 }
 
+void Previewer::clearPreview() {
+    QWidget* viewerNew = new QWidget;
+    layout()->replaceWidget(ui->viewer, viewerNew);
+    delete ui->viewer;
+    ui->viewer = viewerNew;
+    m_viewingPath.clear();
+}
+
 void Previewer::setPreviewPath(const QString &path) {
+    if (isHidden()) 
+        return;
     if (m_officePreviewFut.isRunning())
         m_officePreviewFut.cancel();
 
@@ -78,18 +88,16 @@ void Previewer::resizeEvent(QResizeEvent *) {
     QFileInfo info(m_viewingPath);
     if (info.fileName().isEmpty())
         return;
-    const qsizetype maxLenDisp = qMax(
-        ui->infoLbl->width() / fontMetrics().averageCharWidth() - 6, 9);
     QString ap = info.absolutePath(), fn = info.fileName();
-    if (ap.size() > maxLenDisp)
-        ap = "..." + ap.last(maxLenDisp - 9);
-    if (fn.size() > maxLenDisp)
-        fn = fn.first(maxLenDisp - 9) + "...";
-    ui->infoLbl->setText(tr(
-        "Name: %1\nSize: %2\nFolder: %3\nTimeModified: %4"
-    ).arg(fn).arg(info.size()).arg(ap).arg(
-        info.lastModified().toString(tr("dd-MM-yyyy hh:mm"))
-    ));
+    int dispWidth = ui->infoLbl->width() * 0.9;
+    QFont dispFont = ui->infoLbl->font();
+    QFontMetrics dispMetrics(dispFont);
+    ap = dispMetrics.elidedText(tr("Folder: ") + ap, Qt::ElideLeft, dispWidth);
+    fn = dispMetrics.elidedText(tr("Name: ") + fn, Qt::ElideLeft, dispWidth);
+
+    ui->infoLbl->setText(tr( "%1\nSize: %2\n%3\nTimeModified: %4")
+        .arg(fn, QString::number(info.size()), ap,
+             info.lastModified().toString(tr("dd-MM-yyyy hh:mm"))));
 }
 
 Previewer::~Previewer() { delete ui; }
@@ -106,8 +114,7 @@ void Previewer::_image_previewImpl(const QString& path) {
 }
 
 void Previewer::_media_previewImpl(const QString &path) {
-    Q_UNUSED(path);
-#ifdef _ORIEA_PREVIEW_MEDIA
+#ifdef _SEEV_PREVIEW_MEDIA
     MediaPreviewer* viewerNew = qobject_cast<MediaPreviewer*>(ui->viewer);
     if (viewerNew == nullptr) {
         viewerNew = new MediaPreviewer;

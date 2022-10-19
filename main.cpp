@@ -21,27 +21,8 @@ int main(int argc, char *argv[])
     }
 
     Q_INIT_RESOURCE(seev_rsc);
-    Q_INIT_RESOURCE(previewFailTxt);
-    QFile qssFile(":/qss/seev.qss");
-    qssFile.open(QIODevice::ReadOnly);
-    qApp->setStyleSheet(QString::fromLatin1(qssFile.readAll()));
     qRegisterMetaType<QFileInfo>("QFileInfo");
-
-    QTabWidget tabw;
-    seev::HomePageWidget navw;
-    tabw.addTab(&navw, QObject::tr("Home Page"));
-    tabw.setTabsClosable(true);
-    tabw.resize(600 * 1.618, 600); // :D
-    tabw.show();
-
-    QObject::connect(&tabw, &QTabWidget::tabCloseRequested, 
-        [&tabw] (int i) { if (i >= 1) delete tabw.widget(i); });
-    QObject::connect(&navw, &seev::HomePageWidget::seevWidgetCreated,
-        [&tabw] (QWidget* w) { tabw.addTab(w, w->windowIcon(), w->windowTitle()); });
-    QObject::connect(&navw, &seev::HomePageWidget::seevWidgetCreated,
-                     &tabw, &QTabWidget::setCurrentWidget);
-    int ret = a.exec();
-    while (tabw.count() > 1)
-        delete tabw.widget(1);
-    return ret;
+    seev::AppWidget w;
+    w.show();
+    return a.exec();
 }

@@ -9,6 +9,7 @@ class QFileInfo;
 namespace seev {
 
 class FileinfoModel;
+class Previewer;
 namespace Ui {
 class LocateJobWidget;
 }
@@ -18,9 +19,9 @@ class LocateJobWidget : public QWidget {
 
 public:
     explicit LocateJobWidget(const QString& command, orie::app& orieApp,
-                             QWidget *parent = nullptr);
+                             Previewer* previewer, QWidget *parent = nullptr);
     explicit LocateJobWidget(const QJsonObject& jsonObj, orie::app& orieApp,
-                             QWidget *parent = nullptr);
+                             Previewer* previewer, QWidget *parent = nullptr);
     ~LocateJobWidget();
 
     QJsonObject toJson() const;
@@ -38,6 +39,7 @@ private slots:
 private:
     Ui::LocateJobWidget *ui;
     FileinfoModel* m_resMdl;
+    Previewer* ref_previewer;
 
     orie::app& m_orieApp;
     orie::app::job_list m_jobList;

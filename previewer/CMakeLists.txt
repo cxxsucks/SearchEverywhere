@@ -18,7 +18,7 @@ option(NEED_PREVIEW_MEDIA "Preview Multimedia files in search result" OFF)
 
 if(NEED_PREVIEW_MEDIA)
     find_package(Qt6 COMPONENTS Multimedia MultimediaWidgets REQUIRED)
-    add_compile_definitions(_ORIEA_PREVIEW_MEDIA)
+    add_compile_definitions(_SEEV_PREVIEW_MEDIA)
     set(PREVIEWER_SRC
         mediaPreviewer/mediapreviewer.cpp
         mediaPreviewer/playercontrols.cpp

@@ -1,6 +1,7 @@
 #include "locatejobwidget.hpp"
 #include "ui_locatejobwidget.h"
 #include "../util/fileinfomodel.hpp"
+#include "../previewer/previewer.hpp"
 
 #include <orient/fs_pred_tree/fs_expr_builder.hpp>
 #include <QtCore/QDebug>
@@ -12,8 +13,9 @@
 
 namespace seev {
 
-LocateJobWidget::LocateJobWidget(const QJsonObject& obj, orie::app &app, QWidget *parent)
-    : LocateJobWidget(obj[QStringLiteral("command")].toString(), app, parent)
+LocateJobWidget::LocateJobWidget(const QJsonObject& obj, orie::app &app,
+                                 Previewer *previewer, QWidget *parent)
+    : LocateJobWidget(obj["command"].toString(), app, previewer, parent)
 {
     m_iconPath = obj["iconPath"].toString();
     ui->browseIconBut->setIcon(QIcon(m_iconPath));
@@ -21,8 +23,9 @@ LocateJobWidget::LocateJobWidget(const QJsonObject& obj, orie::app &app, QWidget
     ui->saveNameEdit->setText(obj["description"].toString(tr("New Search")));
 }
 
-LocateJobWidget::LocateJobWidget(const QString& cmd, orie::app &app, QWidget *parent)
-    : QWidget(parent), ui(new Ui::LocateJobWidget)
+LocateJobWidget::LocateJobWidget(const QString& cmd, orie::app &app,
+                                 Previewer *previewer, QWidget *parent)
+    : QWidget(parent), ui(new Ui::LocateJobWidget), ref_previewer(previewer)
     , m_orieApp(app), m_resMdl(new FileinfoModel), m_command(cmd)
 {
     qDebug() << m_command;
@@ -86,7 +89,8 @@ void LocateJobWidget::onResmdlClicked(const QModelIndex &mdl) {
     const qsizetype r = mdl.row() >= m_resMdl->rowCount() ?
                         m_resMdl->rowCount() - 1 : mdl.row();
     const QFileInfo &info = m_resMdl->at(r);
-    ui->previewer->setPreviewPath(info.absoluteFilePath());
+    if (ref_previewer)
+        ref_previewer->setPreviewPath(info.absoluteFilePath());
 
     // Display file icon in the displaying button
     const QSize butS = ui->infoDispBut->size();

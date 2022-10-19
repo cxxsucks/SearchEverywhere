@@ -2,6 +2,7 @@
 #include "orieconfwidget.hpp"
 #include "locatejobwidget.hpp"
 #include "oriepredselector.hpp"
+#include "../previewer/previewer.hpp"
 #include "./ui_homepagewidget.h"
 
 #include <QtCore/QFile>
@@ -10,6 +11,7 @@
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QFileDialog>
+#include <QtWidgets/QTabWidget>
 
 namespace seev {
 
@@ -18,8 +20,8 @@ QString HomePageWidget::seevDefaultConfPath =
 QString HomePageWidget::orieDefaultConfPath = 
     QString(::getenv("HOME")) + "/.config/orie/default.txt";
 
-HomePageWidget::HomePageWidget(QWidget *parent)
-    : QWidget(parent), ui(new Ui::HomePageWidget)
+HomePageWidget::HomePageWidget(Previewer *previewer, QWidget *parent)
+    : QWidget(parent), ui(new Ui::HomePageWidget), ref_previewer(previewer)
     , m_orieApp(m_pool), m_lastUpdateTime(::time(nullptr))
 {
     ui->setupUi(this);
@@ -38,7 +40,7 @@ HomePageWidget::HomePageWidget(QWidget *parent)
     connect(ui->savedSearchLst, &QListWidget::doubleClicked, this,
         [this] (const QModelIndex& idx) { 
             LocateJobWidget* jobw = new LocateJobWidget(
-                m_savedSearches.at(idx.column()).toObject(), m_orieApp
+                m_savedSearches.at(idx.column()).toObject(), m_orieApp, ref_previewer
             );
             connect(jobw, &LocateJobWidget::saveRequested,
                     this, &HomePageWidget::addSavedSearch);
@@ -47,7 +49,7 @@ HomePageWidget::HomePageWidget(QWidget *parent)
     connect(ui->initSearchBut, &QPushButton::clicked, this,
         [this] () { 
             LocateJobWidget* jobw = new LocateJobWidget(
-                ui->predWidg->genCommand(), m_orieApp
+                ui->predWidg->genCommand(), m_orieApp, ref_previewer
             );
             connect(jobw, &LocateJobWidget::saveRequested,
                     this, &HomePageWidget::addSavedSearch);
@@ -165,7 +167,7 @@ void HomePageWidget::typeOrieCmdButClicked() {
     // the user would have already edited the command
     // therefore start a search
     emit seevWidgetCreated(new LocateJobWidget(
-        ui->orieCmdEdit->toPlainText(), m_orieApp
+        ui->orieCmdEdit->toPlainText(), m_orieApp, ref_previewer
     ));
     ui->typeOrieCmdBut->setText(tr("Type `orient` Command (Expert)"));
     ui->orieCmdEdit->setHidden(true);
@@ -189,6 +191,53 @@ void HomePageWidget::showSearchDlg() {
 
     // Edit finished
     ui->newSearchLayout->addWidget(editing, 0, 0, 1, 3);
+}
+
+AppWidget::AppWidget(QWidget* p) 
+    : QWidget(p), m_tabs(new QTabWidget) , m_previewer(new Previewer)
+    , m_homePage(new HomePageWidget(m_previewer))
+    , m_layout(new QHBoxLayout(this))
+{
+    QFile qssFile(":/qss/seev.qss");
+    qssFile.open(QIODevice::ReadOnly);
+    setStyleSheet(QString::fromLatin1(qssFile.readAll()));
+
+    m_layout->addWidget(m_tabs, 1);
+    m_layout->addWidget(m_previewer, 2);
+
+    m_tabs->addTab(m_homePage, tr("Home Page"));
+    m_tabs->setTabsClosable(true);
+
+    QObject::connect(m_tabs, &QTabWidget::tabCloseRequested, 
+        [this] (int i) { if (i >= 1) delete m_tabs->widget(i); });
+    QObject::connect(m_homePage, &seev::HomePageWidget::seevWidgetCreated,
+        [this] (QWidget* w) { m_tabs->addTab(w, w->windowIcon(), w->windowTitle()); });
+    QObject::connect(m_homePage, &seev::HomePageWidget::seevWidgetCreated,
+                     m_tabs, &QTabWidget::setCurrentWidget);
+    resizeEvent(nullptr);
+}
+
+AppWidget::~AppWidget() {
+    // Must delete all locate jobs and conf widgets
+    while (m_tabs->count() > 1)
+        delete m_tabs->widget(1);
+    // then main page, then finally previewer
+    delete m_homePage;
+    delete m_previewer;
+}
+
+void AppWidget::resizeEvent(QResizeEvent*) {
+    if (width() < 600) {
+        // Hide Previewer and clear previewing content
+        if (m_previewer->isHidden())
+            // Already hidden; do nothing
+            return;
+        m_previewer->setHidden(true);
+        m_previewer->clearPreview();
+    } else {
+        // Show Previewer
+        m_previewer->setHidden(false);
+    }
 }
 
 } // namespace seev
