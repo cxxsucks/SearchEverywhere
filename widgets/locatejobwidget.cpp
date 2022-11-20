@@ -11,6 +11,11 @@
 #include <QtWidgets/QFileIconProvider>
 #include <QtWidgets/QFileDialog>
 
+#ifdef _WIN32
+#define fromStdString fromStdWString
+#define toStdString toStdWString
+#endif
+
 namespace seev {
 
 LocateJobWidget::LocateJobWidget(const QJsonObject& obj, orie::app &app,
@@ -57,7 +62,11 @@ LocateJobWidget::LocateJobWidget(const QString& cmd, orie::app &app,
         size_t jobSize = 20 / app.start_paths().size() + 1;
         m_jobList = m_orieApp.get_jobs(*m_expr,
             [this] (bool isAsync, orie::fs_data_iter& it) {
+#ifdef _WIN32
+                QFileInfo resInfo(QString::fromStdWString(it.path().substr(1)));
+#else
                 QFileInfo resInfo(QString::fromStdString(it.path()));
+#endif
                 if (isAsync)
                     emit resultYielded(resInfo);
                 else m_resMdl->addInfo(resInfo);
@@ -96,7 +105,7 @@ void LocateJobWidget::onResmdlClicked(const QModelIndex &mdl) {
     const QSize butS = ui->infoDispBut->size();
     ui->infoDispBut->setIcon(QFileIconProvider().icon(info));
     ui->infoDispBut->setIconSize(QSize(
-        butS.height() * 0.7, butS.height() * 0.7
+        butS.height() * 0.3, butS.height() * 0.3
     ));
 
     // Set descriptive text

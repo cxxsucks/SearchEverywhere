@@ -36,7 +36,7 @@ qt_add_executable(seev MANUAL_FINALIZATION ${PROJECT_SOURCES})
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
 qt_add_translations(seev TS_FILES seev_zh_CN.ts)
 target_link_libraries(
-    seev PRIVATE Qt6::Widgets orie pcre2-8 previewer
+    seev PRIVATE Qt6::Widgets orie previewer
 )
 
 set_target_properties(seev PROPERTIES

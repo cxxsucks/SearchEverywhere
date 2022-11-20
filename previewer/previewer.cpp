@@ -38,6 +38,8 @@ Previewer::Previewer(QWidget *parent, const QString& soffice,bool hasOpen)
             &Previewer::onCopyFilePathClicked);
     connect(ui->cpyDirBut, &QPushButton::clicked, this,
             &Previewer::onCopyDirPathClicked);
+    connect(ui->clrPreviewBut, &QPushButton::clicked, this,
+			&Previewer::clearPreview);
     connect(&m_officePreviewFut, &QFutureWatcher<int>::finished, 
             this, &Previewer::_office_cvtFinish);
 }
@@ -47,6 +49,7 @@ void Previewer::clearPreview() {
     layout()->replaceWidget(ui->viewer, viewerNew);
     delete ui->viewer;
     ui->viewer = viewerNew;
+    ui->fileOpGrp->setHidden(true);
     m_viewingPath.clear();
 }
 
@@ -56,6 +59,7 @@ void Previewer::setPreviewPath(const QString &path) {
     if (m_officePreviewFut.isRunning())
         m_officePreviewFut.cancel();
 
+    ui->fileOpGrp->setHidden(true);
     QMimeDatabase db;
     auto mmt = db.mimeTypeForFile(path);
     QString mmtNme = mmt.name();

@@ -6,6 +6,11 @@
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
 
+#ifdef _WIN32
+#define fromStdString fromStdWString
+#define toStdString toStdWString
+#endif
+
 // Helper function: Select and add a path to a QListWidget
 static void __selAndAddPath(QListWidget* lw) {
     QString selPath = QFileDialog::getExistingDirectory(lw, 

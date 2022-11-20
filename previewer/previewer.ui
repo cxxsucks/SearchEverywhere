@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Previewer</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,0,0">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,0">
    <item>
     <widget class="QWidget" name="viewer" native="true"/>
    </item>
@@ -30,13 +30,6 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QPushButton" name="cpyDirBut">
-        <property name="text">
-         <string>Copy Directory Path</string>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="0" colspan="2">
        <widget class="QLabel" name="infoLbl">
         <property name="sizePolicy">
@@ -47,6 +40,13 @@
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="2">
+       <widget class="QPushButton" name="clrPreviewBut">
+        <property name="text">
+         <string>Clear Preview</string>
         </property>
        </widget>
       </item>
@@ -64,14 +64,21 @@
         </property>
        </widget>
       </item>
+      <item row="1" column="1">
+       <widget class="QPushButton" name="cpyDirBut">
+        <property name="text">
+         <string>Copy Directory Path</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="2">
+       <widget class="QPushButton" name="selBut">
+        <property name="text">
+         <string>Select File to Preview</string>
+        </property>
+       </widget>
+      </item>
      </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="selBut">
-     <property name="text">
-      <string>Select File to Preview</string>
-     </property>
     </widget>
    </item>
   </layout>

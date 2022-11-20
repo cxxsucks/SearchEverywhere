@@ -1,6 +1,11 @@
 #include "oriepredselector.hpp"
 #include "ui_oriepredselector.h"
 
+#ifdef _WIN32
+#define fromStdString fromStdWString
+#define toStdString toStdWString
+#endif
+
 namespace seev {
 
 OriePredSelector::OriePredSelector(QWidget *parent)
