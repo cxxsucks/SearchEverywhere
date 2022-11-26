@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
     Q_INIT_RESOURCE(seev_rsc);
     qRegisterMetaType<QFileInfo>("QFileInfo");
     seev::AppWidget w;
+    w.setWindowIcon(QIcon(QStringLiteral(":/search_img/stolenLogo.png")));
     w.show();
     return a.exec();
 }

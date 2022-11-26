@@ -20,25 +20,36 @@
       <string>New Search</string>
      </property>
      <layout class="QGridLayout" name="newSearchLayout">
-      <item row="2" column="2">
-       <widget class="QCheckBox" name="showAdvChk">
+      <item row="1" column="0" colspan="2">
+       <widget class="QPushButton" name="searchEditDlgBut">
+        <property name="whatsThis">
+         <string>If the above editing space is too small, click this for a dedicated editor.</string>
+        </property>
         <property name="text">
-         <string>Show Advanced</string>
+         <string>Edit Search in a Separate Dialog...</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QPushButton" name="initSearchBut">
+        <property name="text">
+         <string>Start Search</string>
         </property>
        </widget>
       </item>
       <item row="0" column="0" colspan="3">
-       <widget class="seev::OriePredSelector" name="predWidg" native="true">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>15</height>
-         </size>
+       <widget class="QScrollArea" name="predScrollArea">
+        <property name="widgetResizable">
+         <bool>true</bool>
         </property>
+        <widget class="seev::OriePredSelector" name="predWidg"/>
        </widget>
       </item>
       <item row="1" column="2">
        <widget class="QPushButton" name="openStartPathDlgBut">
+        <property name="whatsThis">
+         <string>By default search for all indexed file. You can choose a subset of it.</string>
+        </property>
         <property name="text">
          <string>Edit Start Paths</string>
         </property>
@@ -53,7 +64,7 @@
          <item row="1" column="0">
           <widget class="QLabel" name="label">
            <property name="text">
-            <string>Scan Filesystem Interval</string>
+            <string>Index Update Interval</string>
            </property>
            <property name="buddy">
             <cstring>updIntSpin</cstring>
@@ -62,6 +73,9 @@
          </item>
          <item row="1" column="1">
           <widget class="QSpinBox" name="updIntSpin">
+           <property name="whatsThis">
+            <string>Short interval may burden your system, and long intervals may have trouble keeping the index up-to-date.</string>
+           </property>
            <property name="minimum">
             <number>100</number>
            </property>
@@ -79,7 +93,7 @@
          <item row="2" column="0" colspan="2">
           <widget class="QPushButton" name="openConfWidgBut">
            <property name="text">
-            <string>Edit `orient` Settings</string>
+            <string>Indexing Settings</string>
            </property>
           </widget>
          </item>
@@ -104,39 +118,45 @@
              <pointsize>11</pointsize>
             </font>
            </property>
+           <property name="placeholderText">
+            <string>-print, -delete and -exec nodes are prohibited in SearchEverywhere as they may lead to unexpected actions.</string>
+           </property>
           </widget>
          </item>
          <item row="0" column="0">
           <widget class="QPushButton" name="seevConfPathBut">
+           <property name="whatsThis">
+            <string>The default configuration path works for the most part.</string>
+           </property>
            <property name="text">
             <string>Select seev Conf Path</string>
            </property>
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QLineEdit" name="seevConfPathEdit"/>
+          <widget class="QLineEdit" name="seevConfPathEdit">
+           <property name="whatsThis">
+            <string>The default configuration path works for the most part.</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QPushButton" name="initSearchBut">
-        <property name="text">
-         <string>Start Search</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0" colspan="2">
-       <widget class="QPushButton" name="searchEditDlgBut">
-        <property name="text">
-         <string>Edit Search in a Separate Dialog...</string>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="1">
        <widget class="QPushButton" name="updateDbBut">
+        <property name="whatsThis">
+         <string>Usually the update on startup and auto updates are sufficient. Only update if you want the searches to manifest your recent changes to filesystem.</string>
+        </property>
         <property name="text">
          <string>Scan Filesystem</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QCheckBox" name="showAdvChk">
+        <property name="text">
+         <string>Show Advanced</string>
         </property>
        </widget>
       </item>
@@ -182,12 +202,12 @@
    <slot>setVisible(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>346</x>
-     <y>103</y>
+     <x>383</x>
+     <y>168</y>
     </hint>
     <hint type="destinationlabel">
-     <x>100</x>
-     <y>148</y>
+     <x>121</x>
+     <y>324</y>
     </hint>
    </hints>
   </connection>

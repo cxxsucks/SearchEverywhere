@@ -13,12 +13,23 @@
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QTabWidget>
 
-namespace seev {
+#ifdef _WIN32
+#define fromStdString fromStdWString
+#define toStdString toStdWString
+#endif
 
+namespace seev {
+#ifdef _WIN32
+QString HomePageWidget::seevDefaultConfPath = 
+    QString(::getenv("APPDATA")) + "\\.orie\\seev_default.txt";
+QString HomePageWidget::orieDefaultConfPath = 
+    QString(::getenv("APPDATA")) + "\\.orie\\default.txt";
+#else
 QString HomePageWidget::seevDefaultConfPath = 
     QString(::getenv("HOME")) + "/.config/orie/seev_default.txt";
 QString HomePageWidget::orieDefaultConfPath = 
     QString(::getenv("HOME")) + "/.config/orie/default.txt";
+#endif
 
 HomePageWidget::HomePageWidget(Previewer *previewer, QWidget *parent)
     : QWidget(parent), ui(new Ui::HomePageWidget), ref_previewer(previewer)
@@ -70,7 +81,7 @@ HomePageWidget::HomePageWidget(Previewer *previewer, QWidget *parent)
     // Always launch with default seev configuration path
     setSeevConfPath(seevDefaultConfPath);
     m_orieApp.read_db()
-        .add_start_path(NATIVE_PATH("/")) // TODO: edit start path
+        .add_start_path(orie::str_t())
         .start_auto_update(std::chrono::seconds(ui->updIntSpin->value()));
 }
 
@@ -184,13 +195,12 @@ void HomePageWidget::selSeevConfButClicked() {
 
 void HomePageWidget::showSearchDlg() {
     QDialog exprEditDlg(this);
-    auto editing = ui->predWidg;
-    ui->newSearchLayout->removeWidget(editing);
+    auto editing = ui->predScrollArea->takeWidget();
     (new QHBoxLayout(&exprEditDlg))->addWidget(editing);
     exprEditDlg.exec();
 
     // Edit finished
-    ui->newSearchLayout->addWidget(editing, 0, 0, 1, 3);
+    ui->predScrollArea->setWidget(editing);
 }
 
 AppWidget::AppWidget(QWidget* p) 
@@ -207,6 +217,8 @@ AppWidget::AppWidget(QWidget* p)
 
     m_tabs->addTab(m_homePage, tr("Home Page"));
     m_tabs->setTabsClosable(true);
+    setWindowIcon(QIcon(QStringLiteral(":/search_img/stolenLogo.png")));
+    setWindowTitle(tr("SearchEverywhere"));
 
     QObject::connect(m_tabs, &QTabWidget::tabCloseRequested, 
         [this] (int i) { if (i >= 1) delete m_tabs->widget(i); });

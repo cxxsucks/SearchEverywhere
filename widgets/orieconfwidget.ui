@@ -14,112 +14,28 @@
    <string>Configuring `orient`</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="8" column="1">
-    <widget class="QPushButton" name="hddRootEraseBut">
-     <property name="text">
-      <string>Erase</string>
+   <item row="11" column="0" colspan="4">
+    <widget class="QListWidget" name="prunedPathLst">
+     <property name="alternatingRowColors">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
-   <item row="8" column="0">
-    <widget class="QPushButton" name="hddRootAddBut">
-     <property name="text">
-      <string>Add</string>
+   <item row="1" column="1" colspan="2">
+    <widget class="QLineEdit" name="dbPathEdit">
+     <property name="whatsThis">
+      <string>Default one generally works.</string>
      </property>
     </widget>
    </item>
    <item row="6" column="0">
-    <widget class="QLabel" name="z_2">
-     <property name="text">
-      <string>HDD Root Paths</string>
-     </property>
-     <property name="buddy">
-      <cstring>hddRootPathLst</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="2" colspan="2">
-    <widget class="QPushButton" name="moveToSsdBut">
-     <property name="text">
-      <string>Move up, it is on SSD</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="2" colspan="2">
-    <widget class="QPushButton" name="moveToHddBut">
-     <property name="text">
-      <string>Move down, it is on HDD</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="1" colspan="2">
-    <widget class="QLineEdit" name="dbPathEdit"/>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="z_0">
-     <property name="text">
-      <string>SSD Root Paths</string>
-     </property>
-     <property name="buddy">
-      <cstring>ssdRootPathLst</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <widget class="QPushButton" name="ssdRootEraseBut">
-     <property name="text">
-      <string>Erase</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="z_1">
-     <property name="text">
-      <string>Database Path:</string>
-     </property>
-     <property name="buddy">
-      <cstring>dbPathEdit</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="0" colspan="4">
-    <widget class="QListWidget" name="hddRootPathLst"/>
-   </item>
-   <item row="0" column="3">
-    <widget class="QPushButton" name="browseDbPath">
-     <property name="text">
-      <string>Browse</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0">
     <widget class="QPushButton" name="ssdRootAddBut">
      <property name="text">
       <string>Add</string>
      </property>
     </widget>
    </item>
-   <item row="3" column="0" colspan="4">
-    <widget class="QListWidget" name="ssdRootPathLst"/>
-   </item>
-   <item row="12" column="0">
-    <widget class="QPushButton" name="addPrunedBut">
-     <property name="text">
-      <string>Add</string>
-     </property>
-    </widget>
-   </item>
-   <item row="12" column="1">
-    <widget class="QPushButton" name="erasePrunedBut">
-     <property name="text">
-      <string>Erase</string>
-     </property>
-    </widget>
-   </item>
-   <item row="10" column="0" colspan="4">
-    <widget class="QListWidget" name="prunedPathLst"/>
-   </item>
-   <item row="9" column="0">
+   <item row="10" column="0">
     <widget class="QLabel" name="z_3">
      <property name="text">
       <string>Ignored Paths</string>
@@ -129,10 +45,127 @@
      </property>
     </widget>
    </item>
-   <item row="13" column="0" colspan="4">
+   <item row="14" column="0" colspan="4">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QLabel" name="z_2">
+     <property name="text">
+      <string>HDD Root Paths</string>
+     </property>
+     <property name="buddy">
+      <cstring>hddRootPathLst</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="0">
+    <widget class="QPushButton" name="addPrunedBut">
+     <property name="text">
+      <string>Add</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="2" colspan="2">
+    <widget class="QPushButton" name="moveToHddBut">
+     <property name="text">
+      <string>Move down, it is on HDD</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1">
+    <widget class="QPushButton" name="hddRootEraseBut">
+     <property name="text">
+      <string>Erase</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QPushButton" name="ssdRootEraseBut">
+     <property name="text">
+      <string>Erase</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0" colspan="4">
+    <widget class="QListWidget" name="ssdRootPathLst">
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="2" colspan="2">
+    <widget class="QPushButton" name="moveToSsdBut">
+     <property name="text">
+      <string>Move up, it is on SSD</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0" colspan="4">
+    <widget class="QListWidget" name="hddRootPathLst">
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="z_1">
+     <property name="whatsThis">
+      <string>Default one generally works.</string>
+     </property>
+     <property name="text">
+      <string>Database Path:</string>
+     </property>
+     <property name="buddy">
+      <cstring>dbPathEdit</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="1">
+    <widget class="QPushButton" name="erasePrunedBut">
+     <property name="text">
+      <string>Erase</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="4">
+    <widget class="QLabel" name="z_4">
+     <property name="text">
+      <string>Please make sure the HDD root paths are actually mounted on HDD disks, and so for SSD Root Paths. Mismatches may cause severe performance drops. If unsure, place all root paths on SSD.
+Root and ignored paths CAN overlap.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="z_0">
+     <property name="text">
+      <string>SSD Root Paths</string>
+     </property>
+     <property name="buddy">
+      <cstring>ssdRootPathLst</cstring>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="0">
+    <widget class="QPushButton" name="hddRootAddBut">
+     <property name="text">
+      <string>Add</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <widget class="QPushButton" name="browseDbPath">
+     <property name="whatsThis">
+      <string>Default one generally works.</string>
+     </property>
+     <property name="text">
+      <string>Browse</string>
      </property>
     </widget>
    </item>

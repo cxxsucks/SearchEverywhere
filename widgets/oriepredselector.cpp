@@ -141,7 +141,7 @@ QString OriePredSelector::__genContCommand() const {
 
     if (ui->icaseContBox->isChecked())
         res += QStringLiteral("--ignore-case ");
-    if (ui->noCoucurContBox->isChecked())
+    if (!ui->coucurContBox->isChecked())
         res += QStringLiteral("--blocked ");
     if (ui->allowBinContBox->isChecked())
         res += QStringLiteral("--binary ");

@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>292</width>
-    <height>261</height>
+    <width>289</width>
+    <height>307</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Edit Start Paths</string>
   </property>
   <layout class="QFormLayout" name="formLayout">
-   <item row="0" column="0" colspan="2">
+   <item row="1" column="0" colspan="2">
     <widget class="QListWidget" name="startPathLst">
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
@@ -24,17 +24,28 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
+   <item row="3" column="0">
     <widget class="QPushButton" name="eraseBut">
      <property name="text">
       <string>Erase</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
+   <item row="3" column="1">
     <widget class="QPushButton" name="addBut">
      <property name="text">
       <string>Add</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="2">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Edit start paths with the Add and Erase buttons.
+Starting paths shall not overlap, or the overlapped portion will be searched for twice.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
    </item>

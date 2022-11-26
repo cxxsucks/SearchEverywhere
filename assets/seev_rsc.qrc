@@ -13,5 +13,6 @@
         <file>search_img/music.png</file>
         <file>search_img/doc.png</file>
         <file>search_img/git.png</file>
+        <file>search_img/stolenLogo.png</file>
     </qresource>
 </RCC>
