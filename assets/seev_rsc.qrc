@@ -9,7 +9,6 @@
     </qresource>
     <qresource prefix="/">
         <file>search_img/c.png</file>
-        <file>search_img/zip.png</file>
         <file>search_img/music.png</file>
         <file>search_img/doc.png</file>
         <file>search_img/git.png</file>

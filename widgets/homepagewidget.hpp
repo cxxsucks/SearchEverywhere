@@ -27,6 +27,9 @@ public:
     HomePageWidget(Previewer* previewer, QWidget *parent = nullptr);
     ~HomePageWidget();
 
+    static QString seevDefaultConfPath;
+    static QString orieDefaultConfPath;
+
 signals:
     void seevWidgetCreated(QWidget*);
 
@@ -39,9 +42,6 @@ private:
     QJsonArray m_savedSearches;
     // Prevent spam-click updatedb button
     time_t m_lastUpdateTime;
-
-    static QString seevDefaultConfPath;
-    static QString orieDefaultConfPath;
 
 private slots:
     void updateDbButClicked();

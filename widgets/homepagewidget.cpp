@@ -51,7 +51,7 @@ HomePageWidget::HomePageWidget(Previewer *previewer, QWidget *parent)
     connect(ui->savedSearchLst, &QListWidget::doubleClicked, this,
         [this] (const QModelIndex& idx) { 
             LocateJobWidget* jobw = new LocateJobWidget(
-                m_savedSearches.at(idx.column()).toObject(), m_orieApp, ref_previewer
+                m_savedSearches.at(idx.row()).toObject(), m_orieApp, ref_previewer
             );
             connect(jobw, &LocateJobWidget::saveRequested,
                     this, &HomePageWidget::addSavedSearch);
@@ -94,10 +94,33 @@ void HomePageWidget::fromJsonObj(const QJsonObject& obj) {
         m_orieApp.write_conf(orieConfPath.toStdString());
     }
 
-    // When possible, index with char* instead of QString
     ui->savedSearchLst->clear();
     m_savedSearches = QJsonArray();
-    for (const QJsonValueRef& val : obj["savedSearches"].toArray()) {
+    QJsonArray searchesRead = obj["savedSearches"].toArray();
+    if (searchesRead.empty()) {
+        // Provide some example searches if no searches saved
+        QJsonObject tmpObj;
+        tmpObj["iconPath"] = QStringLiteral(":/search_img/music.png");
+        tmpObj["description"] = tr("MP3/MP4 Files");
+        tmpObj["command"] = QStringLiteral("-type f -a -iname *.mp?");
+        searchesRead.push_back(tmpObj);
+        tmpObj["iconPath"] = QStringLiteral(":/search_img/doc.png");
+        tmpObj["description"] = tr("Recent Office Documents");
+        tmpObj["command"] = QStringLiteral("-mtime -5 -a -ibregex "
+                                           "'\\.(docx?|pptx?|xlsx?)$'");
+        searchesRead.push_back(tmpObj);
+        tmpObj["iconPath"] = QStringLiteral(":/search_img/c.png");
+        tmpObj["description"] = tr("C sources containing 'Hello'");
+        tmpObj["command"] = QStringLiteral("-content-strstr --ignore-case Hello"
+                                           " -a -name *.c");
+        searchesRead.push_back(tmpObj);
+        tmpObj["iconPath"] = QStringLiteral(":/search_img/git.png");
+        tmpObj["description"] = tr("Git Repositories (First Level Only)");
+        tmpObj["command"] = QStringLiteral("-downdir -name '*.git' -a -prune");
+        searchesRead.push_back(tmpObj);
+    }
+
+    for (const QJsonValueRef& val : searchesRead) {
         if (!val.isObject())
             continue;
         addSavedSearch(val.toObject());

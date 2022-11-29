@@ -28,6 +28,9 @@ public:
                             QWidget *parent = nullptr);
     ~OrieConfWidget();
 
+signals:
+    void confDone();
+
 private:
     Ui::OrieConfWidget *ui;
     QString m_confPath;

@@ -113,7 +113,7 @@ void LocateJobWidget::onResmdlClicked(const QModelIndex &mdl) {
     const QSize butS = ui->infoDispBut->size();
     ui->infoDispBut->setIcon(QFileIconProvider().icon(info));
     ui->infoDispBut->setIconSize(QSize(
-        butS.height() * 0.3, butS.height() * 0.3
+        butS.height() * 0.8, butS.height() * 0.8
     ));
 
     // Set descriptive text

@@ -115,7 +115,7 @@ QString OriePredSelector::__genPathCommand() const {
     if (ui->strstrPathRadio->isChecked())
         res = QStringLiteral("-strstr ");
     else if (ui->rgxPathRadio->isChecked())
-        res = QStringLiteral("-regex ");
+        res = QStringLiteral("-bregex ");
     else if (ui->fnmatchRadio->isChecked())
         res = QStringLiteral("-name ");
 

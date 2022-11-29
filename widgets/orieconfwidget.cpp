@@ -98,6 +98,8 @@ OrieConfWidget::OrieConfWidget(const QString &orieConfPath, QWidget *parent)
             std::bind(__delCurPath, ui->ssdRootPathLst));
     connect(ui->erasePrunedBut, &QPushButton::clicked,
             std::bind(__delCurPath, ui->prunedPathLst));
+    connect(ui->buttonBox, &QDialogButtonBox::accepted,
+            this, &OrieConfWidget::confDone);
 }
 
 OrieConfWidget::~OrieConfWidget() {
