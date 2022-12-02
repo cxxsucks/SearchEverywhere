@@ -9,12 +9,11 @@ set(PREVIEWER_SRC
     previewer.cpp previewer.hpp previewer.ui
     imagePreviewer/imagepreviewer.cpp
     imagePreviewer/imagepreviewer.h
-    previewFailTxt/previewFailTxt.qrc
 )
 
 find_package(QT NAMES Qt6 COMPONENTS Widgets REQUIRED)
 
-option(NEED_PREVIEW_MEDIA "Preview Multimedia files in search result" OFF)
+option(ORIE_PREVIEW_MEDIA "Preview Multimedia files in search result" OFF)
 
 if(NEED_PREVIEW_MEDIA)
     find_package(Qt6 COMPONENTS Multimedia MultimediaWidgets REQUIRED)

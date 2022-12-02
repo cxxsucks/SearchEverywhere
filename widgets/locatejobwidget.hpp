@@ -2,7 +2,6 @@
 #define SEEV_LOCATEJOBWIDGET_H
 
 #include <QtWidgets/QWidget>
-#include <QtCore/QFuture>
 #include <orient/app.hpp>
 
 class QFileInfo;
@@ -45,10 +44,13 @@ private:
     orie::app& m_orieApp;
     orie::app::job_list m_jobList;
     std::unique_ptr<orie::fsearch_expr> m_expr;
-    QFuture<void> m_searchFuture;
+    std::thread m_searchThread;
+    std::atomic<bool> m_isSearching;
 
     QString m_command;
     QString m_iconPath;
+
+    void locResCallback(orie::fs_data_iter& it);
 };
 
 

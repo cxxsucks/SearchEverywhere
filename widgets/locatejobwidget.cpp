@@ -6,7 +6,6 @@
 #include <orient/fs_pred_tree/fs_expr_builder.hpp>
 #include <QtCore/QDebug>
 #include <QtCore/QJsonObject>
-#include <QtConcurrent/QtConcurrentRun>
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QScrollBar>
 #include <QtWidgets/QFileIconProvider>
@@ -17,7 +16,9 @@
 #define toStdString toStdWString
 #endif
 
-void locResCallback(seev::LocateJobWidget* widg, orie::fs_data_iter& it) {
+namespace seev {
+
+void LocateJobWidget::locResCallback(orie::fs_data_iter& it) {
 #ifdef _WIN32
         QFileInfo resInfo(QString::fromStdWString(it.path().substr(1)));
 #else
@@ -25,10 +26,8 @@ void locResCallback(seev::LocateJobWidget* widg, orie::fs_data_iter& it) {
 #endif
         if (!resInfo.exists())
             return; // Do not display nonexistent files
-        emit widg->resultYielded(resInfo);
+        emit resultYielded(resInfo);
 }
-
-namespace seev {
 
 LocateJobWidget::LocateJobWidget(const QJsonObject& obj, orie::app &app,
                                  Previewer *previewer, QWidget *parent)
@@ -43,7 +42,7 @@ LocateJobWidget::LocateJobWidget(const QJsonObject& obj, orie::app &app,
 LocateJobWidget::LocateJobWidget(const QString& cmd, orie::app &app,
                                  Previewer *previewer, QWidget *parent)
     : QWidget(parent), ui(new Ui::LocateJobWidget), ref_previewer(previewer)
-    , m_orieApp(app), m_resMdl(new FileinfoModel), m_command(cmd)
+    , m_orieApp(app), m_resMdl(new FileinfoModel), m_command(cmd), m_isSearching(true)
 {
     qDebug() << m_command;
     ui->setupUi(this);
@@ -71,12 +70,13 @@ LocateJobWidget::LocateJobWidget(const QString& cmd, orie::app &app,
             return;
         }
 
-        m_searchFuture = QtConcurrent::run([this] () {
+        m_searchThread = std::thread([this] () {
             size_t jobSize = 20 / m_orieApp.start_paths().size() + 1;
             m_jobList = m_orieApp.get_jobs(*m_expr,
                 [this] (orie::fs_data_iter& it) {
-                    locResCallback(this, it);
+                    locResCallback(it);
                 }, jobSize, jobSize);
+            m_isSearching = false;
         });
 
     } catch (std::exception& e) {
@@ -88,7 +88,8 @@ LocateJobWidget::LocateJobWidget(const QString& cmd, orie::app &app,
 }
 
 LocateJobWidget::~LocateJobWidget() {
-    m_searchFuture.waitForFinished();
+    if (m_searchThread.joinable())
+        m_searchThread.join();
     delete ui; // auto-free m_resmdl
 }
 
@@ -131,17 +132,21 @@ void LocateJobWidget::onResmdlClicked(const QModelIndex &mdl) {
 
 void LocateJobWidget::onScroll(int value) {
     if (value <= ui->locateResLst->verticalScrollBar()->maximum() * 0.95 ||
-        m_orieApp.start_paths().size() <= 0 || m_searchFuture.isRunning())
+        m_orieApp.start_paths().size() <= 0 || m_isSearching)
         return;
 
-    m_searchFuture = QtConcurrent::run([this] () {
+    if (m_searchThread.joinable())
+        m_searchThread.join();
+    m_isSearching = true;
+    m_searchThread = std::thread([this] () {
         size_t jobSize = 20 / m_orieApp.start_paths().size() + 1;
         for (auto& datJobPair : m_jobList) {
             datJobPair.second->start(m_orieApp._pool, 
                 [this] (orie::fs_data_iter& it) {
-                    locResCallback(this, it);
+                    locResCallback(it);
                 }, jobSize, jobSize);
         }
+        m_isSearching = false;
     });
 }
 

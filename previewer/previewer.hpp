@@ -1,6 +1,6 @@
 #pragma once
 #include <QtWidgets/QWidget>
-#include <QtCore/QFutureWatcher>
+#include <thread>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Previewer; }
@@ -24,26 +24,28 @@ public slots:
     void selectedPreviewPath();
     void clearPreview();
 
+signals:
+    void officeConvertFinished(int execRet);
+
 private:
     ::Ui::Previewer *ui;
     QString m_viewingPath;
     QString m_sofficePath;
-    QFutureWatcher<int> m_officePreviewFut;
+    std::thread m_officeConvertThread;
 
     void _media_previewImpl(const QString &path);
     void _image_previewImpl(const QString &path);
     void _txt_previewImpl(const QString &path);
     void _html_previewimpl(const QUrl &path, bool md);
     void _dir_previewimpl(const QString &path);
-
     void _office_previewimpl(const QString& path);
-    void _office_cvtFinish();
 
 private slots:
     void onOpenFileClicked();
     void onOpenDirClicked();
     void onCopyFilePathClicked();
     void onCopyDirPathClicked();
+    void onOfficeCvtFinish(int ret);
 
 protected:
     void resizeEvent(QResizeEvent*) override;

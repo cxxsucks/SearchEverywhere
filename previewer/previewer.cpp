@@ -10,8 +10,6 @@
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtCore/QProcess>
-#include <QtCore/QFuture>
-#include <QtConcurrent/QtConcurrentRun>
 #include <QtGui/QClipboard>
 #include <QtGui/QDesktopServices>
 #include <QtWidgets/QTextBrowser>
@@ -29,7 +27,8 @@ Previewer::Previewer(QWidget *parent, const QString& soffice,bool hasOpen)
     if (!hasOpen)
         ui->selBut->hide();
 
-    connect(ui->selBut, &QPushButton::clicked, this, &Previewer::selectedPreviewPath);
+    connect(ui->selBut, &QPushButton::clicked, this,
+            &Previewer::selectedPreviewPath);
     connect(ui->openFileBut, &QPushButton::clicked, this,
             &Previewer::onOpenFileClicked);
     connect(ui->openDirBut, &QPushButton::clicked, this,
@@ -40,8 +39,8 @@ Previewer::Previewer(QWidget *parent, const QString& soffice,bool hasOpen)
             &Previewer::onCopyDirPathClicked);
     connect(ui->clrPreviewBut, &QPushButton::clicked, this,
 			&Previewer::clearPreview);
-    connect(&m_officePreviewFut, &QFutureWatcher<int>::finished, 
-            this, &Previewer::_office_cvtFinish);
+    connect(this, &Previewer::officeConvertFinished, this,
+            &Previewer::onOfficeCvtFinish);
 }
 
 void Previewer::clearPreview() {
@@ -56,8 +55,6 @@ void Previewer::clearPreview() {
 void Previewer::setPreviewPath(const QString &path) {
     if (isHidden()) 
         return;
-    if (m_officePreviewFut.isRunning())
-        m_officePreviewFut.cancel();
 
     ui->fileOpGrp->setHidden(true);
     QMimeDatabase db;
@@ -104,7 +101,11 @@ void Previewer::resizeEvent(QResizeEvent *) {
              info.lastModified().toString(tr("dd-MM-yyyy hh:mm"))));
 }
 
-Previewer::~Previewer() { delete ui; }
+Previewer::~Previewer() {
+    if (m_officeConvertThread.joinable())
+        m_officeConvertThread.join();
+    delete ui; 
+}
 
 void Previewer::_image_previewImpl(const QString& path) {
     ImagePreviewer* viewerNew = qobject_cast<ImagePreviewer*>(ui->viewer);
@@ -222,24 +223,24 @@ void Previewer::_office_previewimpl(const QString& path) {
         QStringLiteral("--outdir"), QDir::tempPath()
     };
 
-    m_officePreviewFut.setFuture(QtConcurrent::run(
-        QProcess::execute, m_sofficePath, args
-    ));
+    if (m_officeConvertThread.joinable())    
+        m_officeConvertThread.detach();
+    m_officeConvertThread = std::thread([this, args] () {
+        emit officeConvertFinished(QProcess::execute(m_sofficePath, args));
+    });
 }
 
-void Previewer::_office_cvtFinish() {
-    int ret = m_officePreviewFut.result();
+void Previewer::onOfficeCvtFinish(int ret) {
     QFileInfo info(m_viewingPath);
     info = QFileInfo(QDir::tempPath() + QDir::separator() + info.baseName() 
-                     + QStringLiteral(".jpg"));
+                   + QStringLiteral(".jpg"));
 
     if (ret == -2 || !info.exists()) 
-        _html_previewimpl(QStringLiteral("qrc:/previewFailTxt/noAx.md"), true);
+        _txt_previewImpl(m_viewingPath);
     else {
         _image_previewImpl(info.absoluteFilePath());
         QFile::remove(info.absoluteFilePath());
     }
-
 }
 
 void Previewer::selectedPreviewPath() {
