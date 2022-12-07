@@ -7,6 +7,7 @@ namespace Ui { class Previewer; }
 QT_END_NAMESPACE
 
 namespace seev {
+
 class Previewer : public QWidget
 {
     Q_OBJECT

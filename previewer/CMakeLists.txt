@@ -13,9 +13,9 @@ set(PREVIEWER_SRC
 
 find_package(QT NAMES Qt6 COMPONENTS Widgets REQUIRED)
 
-option(ORIE_PREVIEW_MEDIA "Preview Multimedia files in search result" OFF)
+option(SEEV_PREVIEW_MEDIA "Preview Multimedia files in search result" OFF)
 
-if(NEED_PREVIEW_MEDIA)
+if(SEEV_PREVIEW_MEDIA)
     find_package(Qt6 COMPONENTS Multimedia MultimediaWidgets REQUIRED)
     add_compile_definitions(_SEEV_PREVIEW_MEDIA)
     set(PREVIEWER_SRC
@@ -27,13 +27,13 @@ if(NEED_PREVIEW_MEDIA)
         mediaPreviewer/videowidget.h
         ${PREVIEWER_SRC}
     )
-endif()
+endif(SEEV_PREVIEW_MEDIA)
 
 add_library(previewer
     ${PREVIEWER_SRC}
 )
 
-if(NEED_PREVIEW_MEDIA)
+if(SEEV_PREVIEW_MEDIA)
     target_link_libraries(previewer PRIVATE Qt6::Multimedia Qt6::MultimediaWidgets)
-endif()
+endif(SEEV_PREVIEW_MEDIA)
 target_link_libraries(previewer PRIVATE Qt6::Widgets)

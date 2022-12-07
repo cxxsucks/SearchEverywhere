@@ -1,0 +1,7 @@
+[Desktop Entry]
+Terminal=false
+Type=Application
+Name=SearchEverywhere
+Exec=seev
+Icon=stolenLogo
+Categories=Utility;

@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 project(seev VERSION 0.1.1 LANGUAGES CXX)
 
 add_subdirectory(orient)
+add_subdirectory(assets)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/orient/include)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -46,3 +47,4 @@ set_target_properties(seev PROPERTIES
 )
 
 qt_finalize_executable(seev)
+install(TARGETS seev DESTINATION bin)
