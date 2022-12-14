@@ -2,9 +2,8 @@
 #define SEEV_LOCATEJOBWIDGET_H
 
 #include <QtWidgets/QWidget>
+#include <QtCore/QFileInfo>
 #include <orient/app.hpp>
-
-class QFileInfo;
 
 namespace seev {
 
@@ -40,6 +39,7 @@ private:
     Ui::LocateJobWidget *ui;
     FileinfoModel* m_resMdl;
     Previewer* ref_previewer;
+    QFileInfo m_lastSelected;
 
     orie::app& m_orieApp;
     orie::app::job_list m_jobList;

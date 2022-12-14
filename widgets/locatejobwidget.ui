@@ -2,24 +2,30 @@
 <ui version="4.0">
  <class>seev::LocateJobWidget</class>
  <widget class="QWidget" name="seev::LocateJobWidget">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>316</width>
-    <height>474</height>
-   </rect>
-  </property>
   <property name="windowTitle">
    <string>New Search</string>
   </property>
-  <layout class="QGridLayout" columnstretch="1,0">
+  <layout class="QFormLayout">
+   <item row="0" column="0">
+    <widget class="QCheckBox" name="showSaveOptsChk">
+     <property name="text">
+      <string>Show Save Options</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QPushButton" name="editAgainBut">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>TODO: Edit &amp;&amp; Search Again</string>
+     </property>
+    </widget>
+   </item>
    <item row="1" column="0" colspan="2">
     <widget class="QGroupBox" name="saveBox">
-     <property name="title">
-      <string>GroupBox</string>
-     </property>
-     <layout class="QFormLayout" name="formLayout">
+     <layout class="QFormLayout" name="_2">
       <item row="0" column="0">
        <widget class="QPushButton" name="saveBut">
         <property name="text">
@@ -54,15 +60,6 @@
      </layout>
     </widget>
    </item>
-   <item row="3" column="0" colspan="2">
-    <widget class="QPushButton" name="infoDispBut">
-     <property name="text">
-      <string>Details will be Shown Here
-After Clicking Result Table.
-Click here again to open it.</string>
-     </property>
-    </widget>
-   </item>
    <item row="2" column="0" colspan="2">
     <widget class="QTableView" name="locateResLst">
      <property name="selectionMode">
@@ -73,20 +70,32 @@ Click here again to open it.</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="1">
-    <widget class="QPushButton" name="editAgainBut">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
+   <item row="3" column="0" colspan="2">
+    <widget class="QPushButton" name="infoDispBut">
      <property name="text">
-      <string>TODO: Edit &amp;&amp; Search Again</string>
+      <string>Details will be Shown Here
+After Clicking Result Table.
+Click here again to open it.</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="0">
-    <widget class="QCheckBox" name="showSaveOptsChk">
+   <item row="4" column="1">
+    <widget class="QSpinBox" name="fetchMoreSpin">
+     <property name="suffix">
+      <string> Files</string>
+     </property>
+     <property name="minimum">
+      <number>10</number>
+     </property>
+     <property name="value">
+      <number>20</number>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QPushButton" name="fetchMoreBut">
      <property name="text">
-      <string>Show Save Options</string>
+      <string>Search More</string>
      </property>
     </widget>
    </item>
@@ -117,8 +126,8 @@ Click here again to open it.</string>
    <slot>setWindowTitle(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>229</x>
-     <y>110</y>
+     <x>278</x>
+     <y>107</y>
     </hint>
     <hint type="destinationlabel">
      <x>291</x>

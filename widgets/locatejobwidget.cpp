@@ -10,6 +10,7 @@
 #include <QtWidgets/QScrollBar>
 #include <QtWidgets/QFileIconProvider>
 #include <QtWidgets/QFileDialog>
+#include <QtGui/QDesktopServices>
 
 #ifdef _WIN32
 #define fromStdString fromStdWString
@@ -42,7 +43,7 @@ LocateJobWidget::LocateJobWidget(const QJsonObject& obj, orie::app &app,
 LocateJobWidget::LocateJobWidget(const QString& cmd, orie::app &app,
                                  Previewer *previewer, QWidget *parent)
     : QWidget(parent), ui(new Ui::LocateJobWidget), ref_previewer(previewer)
-    , m_orieApp(app), m_resMdl(new FileinfoModel), m_command(cmd), m_isSearching(true)
+    , m_orieApp(app), m_resMdl(new FileinfoModel), m_command(cmd), m_isSearching(false)
 {
     qDebug() << m_command;
     ui->setupUi(this);
@@ -58,6 +59,14 @@ LocateJobWidget::LocateJobWidget(const QString& cmd, orie::app &app,
     connect(ui->browseIconBut, &QPushButton::clicked, this, &LocateJobWidget::onIcoPathSel);
     connect(ui->saveBut, &QPushButton::clicked, this, 
             [this] () { saveRequested(toJson()); });
+    connect(ui->infoDispBut, &QPushButton::clicked, this, [this] () {
+        if (m_lastSelected.isReadable())
+            QDesktopServices::openUrl(
+                QUrl::fromLocalFile(m_lastSelected.absoluteFilePath())
+            ); 
+    });
+    connect(ui->fetchMoreBut, &QPushButton::clicked, this,
+            [this] () { onScroll(2147483647); });
 
     try {
         // TODO: Prevent the usage of -[f]print[f], -exec, -delete
@@ -70,14 +79,9 @@ LocateJobWidget::LocateJobWidget(const QString& cmd, orie::app &app,
             return;
         }
 
-        m_searchThread = std::thread([this] () {
-            size_t jobSize = 20 / m_orieApp.start_paths().size() + 1;
-            m_jobList = m_orieApp.get_jobs(*m_expr,
-                [this] (orie::fs_data_iter& it) {
-                    locResCallback(it);
-                }, jobSize, jobSize);
-            m_isSearching = false;
-        });
+        m_jobList = m_orieApp.get_jobs(*m_expr);
+        // Start first search
+        onScroll(2147483647);
 
     } catch (std::exception& e) {
         QMessageBox::warning(this, tr("Expression Error"),
@@ -88,6 +92,10 @@ LocateJobWidget::LocateJobWidget(const QString& cmd, orie::app &app,
 }
 
 LocateJobWidget::~LocateJobWidget() {
+    // Request all jobs to stop
+    for (auto& datJobPair : m_jobList)
+        datJobPair.second->cancel();
+    // Wait for all jobs to actually stop
     if (m_searchThread.joinable())
         m_searchThread.join();
     delete ui; // auto-free m_resmdl
@@ -106,19 +114,19 @@ void LocateJobWidget::onResmdlClicked(const QModelIndex &mdl) {
         return;
     const qsizetype r = mdl.row() >= m_resMdl->rowCount() ?
                         m_resMdl->rowCount() - 1 : mdl.row();
-    const QFileInfo &info = m_resMdl->at(r);
+    m_lastSelected = m_resMdl->at(r);
     if (ref_previewer)
-        ref_previewer->setPreviewPath(info.absoluteFilePath());
+        ref_previewer->setPreviewPath(m_lastSelected.absoluteFilePath());
 
     // Display file icon in the displaying button
     const QSize butS = ui->infoDispBut->size();
-    ui->infoDispBut->setIcon(QFileIconProvider().icon(info));
+    ui->infoDispBut->setIcon(QFileIconProvider().icon(m_lastSelected));
     ui->infoDispBut->setIconSize(QSize(
         butS.height() * 0.8, butS.height() * 0.8
     ));
 
     // Set descriptive text
-    QString ap = info.absolutePath(), fn = info.fileName();
+    QString ap = m_lastSelected.absolutePath(), fn = m_lastSelected.fileName();
     int dispWidth = butS.width() * 0.7;
     QFont dispFont = ui->infoDispBut->font();
     QFontMetrics dispMetrics(dispFont);
@@ -126,8 +134,8 @@ void LocateJobWidget::onResmdlClicked(const QModelIndex &mdl) {
     fn = dispMetrics.elidedText(tr("Name: ") + fn, Qt::ElideLeft, dispWidth);
 
     ui->infoDispBut->setText(tr( "%1\nSize: %2\n%3\nTimeModified: %4")
-        .arg(fn, QString::number(info.size()), ap,
-             info.lastModified().toString(tr("dd-MM-yyyy hh:mm"))));
+        .arg(fn, QString::number(m_lastSelected.size()), ap,
+             m_lastSelected.lastModified().toString(tr("dd-MM-yyyy hh:mm"))));
 }
 
 void LocateJobWidget::onScroll(int value) {
@@ -135,11 +143,22 @@ void LocateJobWidget::onScroll(int value) {
         m_orieApp.start_paths().size() <= 0 || m_isSearching)
         return;
 
+    for (auto& datJobPair : m_jobList) 
+        if (!datJobPair.second->is_finished())
+            goto notFinished;
+    // Already finished; disable the "Fetch More" button
+    ui->fetchMoreBut->setDisabled(true);
+    ui->fetchMoreSpin->setDisabled(true);
+    ui->fetchMoreBut->setText(tr("All Done"));
+    return;
+
+notFinished:
     if (m_searchThread.joinable())
         m_searchThread.join();
     m_isSearching = true;
     m_searchThread = std::thread([this] () {
-        size_t jobSize = 20 / m_orieApp.start_paths().size() + 1;
+        size_t jobSize = ui->fetchMoreSpin->value() / 
+                         m_orieApp.start_paths().size() + 1;
         for (auto& datJobPair : m_jobList) {
             datJobPair.second->start(m_orieApp._pool, 
                 [this] (orie::fs_data_iter& it) {
