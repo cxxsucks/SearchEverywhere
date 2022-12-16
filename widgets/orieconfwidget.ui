@@ -22,15 +22,11 @@
     </widget>
    </item>
    <item row="8" column="0" colspan="4">
-    <widget class="QListWidget" name="hddRootPathLst">
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-    </widget>
+    <widget class="QListWidget" name="hddRootPathLst"/>
    </item>
    <item row="1" column="3">
     <widget class="QPushButton" name="browseDbPath">
-     <property name="whatsThis">
+     <property name="toolTip">
       <string>Default one generally works.</string>
      </property>
      <property name="text">
@@ -46,11 +42,7 @@
     </widget>
    </item>
    <item row="4" column="0" colspan="4">
-    <widget class="QListWidget" name="ssdRootPathLst">
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-    </widget>
+    <widget class="QListWidget" name="ssdRootPathLst"/>
    </item>
    <item row="9" column="2" colspan="2">
     <widget class="QPushButton" name="moveToSsdBut">
@@ -68,7 +60,7 @@
    </item>
    <item row="1" column="0">
     <widget class="QLabel" name="z_1">
-     <property name="whatsThis">
+     <property name="toolTip">
       <string>Default one generally works.</string>
      </property>
      <property name="text">
@@ -133,17 +125,13 @@ Root and ignored paths CAN overlap.</string>
    </item>
    <item row="1" column="1" colspan="2">
     <widget class="QLineEdit" name="dbPathEdit">
-     <property name="whatsThis">
+     <property name="toolTip">
       <string>Default one generally works.</string>
      </property>
     </widget>
    </item>
    <item row="11" column="0" colspan="4">
-    <widget class="QListWidget" name="prunedPathLst">
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-    </widget>
+    <widget class="QListWidget" name="prunedPathLst"/>
    </item>
    <item row="10" column="0">
     <widget class="QLabel" name="z_3">

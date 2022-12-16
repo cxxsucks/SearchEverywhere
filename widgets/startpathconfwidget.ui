@@ -2,14 +2,6 @@
 <ui version="4.0">
  <class>seev::StartPathConfWidget</class>
  <widget class="QDialog" name="seev::StartPathConfWidget">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>289</width>
-    <height>307</height>
-   </rect>
-  </property>
   <property name="windowTitle">
    <string>Edit Start Paths</string>
   </property>

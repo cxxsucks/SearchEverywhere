@@ -77,6 +77,12 @@
 After Clicking Result Table.
 Click here again to open it.</string>
      </property>
+     <property name="iconSize">
+      <size>
+       <width>48</width>
+       <height>48</height>
+      </size>
+     </property>
     </widget>
    </item>
    <item row="4" column="1">

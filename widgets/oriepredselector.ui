@@ -130,7 +130,7 @@
       </item>
       <item row="0" column="1">
        <widget class="QCheckBox" name="icaseBox">
-        <property name="whatsThis">
+        <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do case-insensitive searches when checked.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Note: &lt;/span&gt;On Windows, all glob patterns are case-&lt;span style=&quot; font-weight:700;&quot;&gt;in&lt;/span&gt;sensitive, regardless of whether ignore case is checked.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
@@ -140,17 +140,17 @@
       </item>
       <item row="1" column="0">
        <widget class="QRadioButton" name="rgxPathRadio">
-        <property name="whatsThis">
+        <property name="toolTip">
          <string>PCRE2 Regular Expression. Do not use if you do not know what regex is.</string>
         </property>
         <property name="text">
-         <string>RegEx</string>
+         <string notr="true">RegEx</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
        <widget class="QCheckBox" name="fullPathBox">
-        <property name="whatsThis">
+        <property name="toolTip">
          <string>Search in full path instead of just base name.</string>
         </property>
         <property name="text">
@@ -160,17 +160,17 @@
       </item>
       <item row="2" column="0">
        <widget class="QRadioButton" name="fnmatchRadio">
-        <property name="whatsThis">
+        <property name="toolTip">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Patterns like &lt;span style=&quot; font-style:italic;&quot;&gt;*.txt &lt;/span&gt;which matches all txt files. &lt;/p&gt;&lt;p&gt;Also support ? (matches a single character) and [] (match a character between).&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Note: &lt;/span&gt;On Windows, all glob patterns are case-&lt;span style=&quot; font-weight:700;&quot;&gt;in&lt;/span&gt;sensitive, regardless of whether ignore case is checked.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
-         <string>Glob</string>
+         <string notr="true">Glob</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
        <widget class="QCheckBox" name="lnameBox">
-        <property name="whatsThis">
+        <property name="toolTip">
          <string>Match against the pointed-to path of a symlink. Implies `-type l`. DO NOT CHECK if you do not know what a symlink is</string>
         </property>
         <property name="text">
@@ -205,7 +205,7 @@
       </property>
       <item row="0" column="0">
        <widget class="QRadioButton" name="strstrContRadio">
-        <property name="whatsThis">
+        <property name="toolTip">
          <string>Simple string match.</string>
         </property>
         <property name="text">
@@ -218,7 +218,7 @@
       </item>
       <item row="2" column="1">
        <widget class="QCheckBox" name="icaseContBox">
-        <property name="whatsThis">
+        <property name="toolTip">
          <string>Do case-insensitive match.</string>
         </property>
         <property name="text">
@@ -235,17 +235,17 @@
       </item>
       <item row="2" column="0">
        <widget class="QRadioButton" name="rgxContRadio">
-        <property name="whatsThis">
+        <property name="toolTip">
          <string>PCRE2 Regular Expression. Do not use if you do not know what regex is.</string>
         </property>
         <property name="text">
-         <string>RegEx</string>
+         <string notr="true">RegEx</string>
         </property>
        </widget>
       </item>
       <item row="3" column="1">
        <widget class="QCheckBox" name="coucurContBox">
-        <property name="whatsThis">
+        <property name="toolTip">
          <string>Search for content in multiple threads. Will be significantly faster on SSDs and marginally faster on HDDs, but would likely cause CPU usage to soar. Choose according ro your starting paths.</string>
         </property>
         <property name="text">
@@ -255,7 +255,7 @@
       </item>
       <item row="0" column="1">
        <widget class="QCheckBox" name="allowBinContBox">
-        <property name="whatsThis">
+        <property name="toolTip">
          <string>Also search for non-plain text file.</string>
         </property>
         <property name="text">
@@ -300,7 +300,7 @@
       </item>
       <item>
        <widget class="QCheckBox" name="executableChk">
-        <property name="whatsThis">
+        <property name="toolTip">
          <string>On Windows &quot;executables&quot; are simply .exe files. (and batch files if you know what they are.)</string>
         </property>
         <property name="text">
@@ -328,7 +328,7 @@
       </property>
       <item row="3" column="0">
        <widget class="QCheckBox" name="symlinkChk">
-        <property name="whatsThis">
+        <property name="toolTip">
          <string>Symbolic links. These are NOT .lnk files and if you do not know what a symlink is, chances are that no symlinks exist on your Windows system.</string>
         </property>
         <property name="text">
@@ -338,7 +338,7 @@
       </item>
       <item row="0" column="0">
        <widget class="QCheckBox" name="regFileChk">
-        <property name="whatsThis">
+        <property name="toolTip">
          <string>Regular, non-directory files.</string>
         </property>
         <property name="text">
@@ -351,7 +351,7 @@
       </item>
       <item row="0" column="1">
        <widget class="QCheckBox" name="dirChk">
-        <property name="whatsThis">
+        <property name="toolTip">
          <string>Or folders as you like to call them.</string>
         </property>
         <property name="text">
@@ -361,7 +361,7 @@
       </item>
       <item row="3" column="1">
        <widget class="QCheckBox" name="fifoChk">
-        <property name="whatsThis">
+        <property name="toolTip">
          <string>FIFO files. Do not exist on Windows.</string>
         </property>
         <property name="text">
@@ -371,7 +371,7 @@
       </item>
       <item row="4" column="0">
        <widget class="QCheckBox" name="blockDevChk">
-        <property name="whatsThis">
+        <property name="toolTip">
          <string>Block devices. Do not exist on Windows.</string>
         </property>
         <property name="text">
@@ -381,7 +381,7 @@
       </item>
       <item row="4" column="1">
        <widget class="QCheckBox" name="charDevChk">
-        <property name="whatsThis">
+        <property name="toolTip">
          <string>Character Devices. Do not exist on Windows.</string>
         </property>
         <property name="text">
@@ -477,7 +477,7 @@
          <item>
           <widget class="QRadioButton" name="gtRadio">
            <property name="text">
-            <string>&gt;</string>
+            <string notr="true">&gt;</string>
            </property>
            <property name="checked">
             <bool>true</bool>
@@ -486,18 +486,18 @@
          </item>
          <item>
           <widget class="QRadioButton" name="eqRadio">
-           <property name="whatsThis">
+           <property name="toolTip">
             <string>For files, all but size are rounded down to the nearest unit before comparing. Size rounds up</string>
            </property>
            <property name="text">
-            <string>==</string>
+            <string notr="true">==</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QRadioButton" name="ltRadio">
            <property name="text">
-            <string>&lt;</string>
+            <string notr="true">&lt;</string>
            </property>
           </widget>
          </item>
@@ -518,7 +518,7 @@
          </property>
          <item row="0" column="0">
           <widget class="QRadioButton" name="absStatRadio">
-           <property name="whatsThis">
+           <property name="toolTip">
             <string>When chosen, the respective file stat is compared with the number.</string>
            </property>
            <property name="text">
@@ -538,7 +538,7 @@
          </item>
          <item row="1" column="0">
           <widget class="QRadioButton" name="relaStatRadio">
-           <property name="whatsThis">
+           <property name="toolTip">
             <string>When chosen, the respective file stat is compared with that of the target file.</string>
            </property>
            <property name="text">
@@ -549,7 +549,7 @@
          <item row="1" column="1">
           <widget class="QLineEdit" name="targEdit">
            <property name="placeholderText">
-            <string>/path/to/target</string>
+            <string notr="true">/path/to/target</string>
            </property>
           </widget>
          </item>

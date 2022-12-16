@@ -121,9 +121,10 @@ void LocateJobWidget::onResmdlClicked(const QModelIndex &mdl) {
     // Display file icon in the displaying button
     const QSize butS = ui->infoDispBut->size();
     ui->infoDispBut->setIcon(QFileIconProvider().icon(m_lastSelected));
-    ui->infoDispBut->setIconSize(QSize(
-        butS.height() * 0.8, butS.height() * 0.8
-    ));
+    // Icon size is set in locatejobwidget.ui
+    // ui->infoDispBut->setIconSize(QSize(
+    //     butS.height() * 0.8, butS.height() * 0.8
+    // ));
 
     // Set descriptive text
     QString ap = m_lastSelected.absolutePath(), fn = m_lastSelected.fileName();

@@ -22,7 +22,7 @@
      <layout class="QGridLayout" name="newSearchLayout">
       <item row="1" column="0" colspan="2">
        <widget class="QPushButton" name="searchEditDlgBut">
-        <property name="whatsThis">
+        <property name="toolTip">
          <string>If the above editing space is too small, click this for a dedicated editor.</string>
         </property>
         <property name="text">
@@ -42,12 +42,21 @@
         <property name="widgetResizable">
          <bool>true</bool>
         </property>
-        <widget class="seev::OriePredSelector" name="predWidg"/>
+        <widget class="seev::OriePredSelector" name="predWidg">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>361</width>
+           <height>68</height>
+          </rect>
+         </property>
+        </widget>
        </widget>
       </item>
       <item row="1" column="2">
        <widget class="QPushButton" name="openStartPathDlgBut">
-        <property name="whatsThis">
+        <property name="toolTip">
          <string>By default search for all indexed file. You can choose a subset of it.</string>
         </property>
         <property name="text">
@@ -73,7 +82,7 @@
          </item>
          <item row="1" column="1">
           <widget class="QSpinBox" name="updIntSpin">
-           <property name="whatsThis">
+           <property name="toolTip">
             <string>Short interval may burden your system, and long intervals may have trouble keeping the index up-to-date.</string>
            </property>
            <property name="minimum">
@@ -125,7 +134,7 @@
          </item>
          <item row="0" column="0">
           <widget class="QPushButton" name="seevConfPathBut">
-           <property name="whatsThis">
+           <property name="toolTip">
             <string>The default configuration path works for the most part.</string>
            </property>
            <property name="text">
@@ -135,7 +144,7 @@
          </item>
          <item row="0" column="1">
           <widget class="QLineEdit" name="seevConfPathEdit">
-           <property name="whatsThis">
+           <property name="toolTip">
             <string>The default configuration path works for the most part.</string>
            </property>
           </widget>
@@ -145,7 +154,7 @@
       </item>
       <item row="2" column="1">
        <widget class="QPushButton" name="updateDbBut">
-        <property name="whatsThis">
+        <property name="toolTip">
          <string>Usually the update on startup and auto updates are sufficient. Only update if you want the searches to manifest your recent changes to filesystem.</string>
         </property>
         <property name="text">
