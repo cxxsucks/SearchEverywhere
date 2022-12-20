@@ -28,10 +28,10 @@ OLD_CWD=$(readlink -f .)
 # "$OLD_CWD"/build is in gitignore. Built files are stored at $BUILD_DIR instead
 mkdir -p "$OLD_CWD"/bin "$OLD_CWD"/build
 pushd "$OLD_CWD"/build
-# wget --timeout=5 -N \
-#     https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
-# wget --timeout=5 -N \
-#     https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage
+wget --timeout=5 -N \
+    https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
+wget --timeout=5 -N \
+    https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage
 chmod +x linuxdeploy*.AppImage
 popd
 

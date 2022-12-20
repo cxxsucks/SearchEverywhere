@@ -33,7 +33,7 @@ qt_add_executable(seev MANUAL_FINALIZATION ${PROJECT_SOURCES})
 #    set_property(TARGET seev APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
 # For more information, see https://doc.qt.io/qt-6/qt-add-executable.html#target-creation
-qt_add_translations(seev TS_FILES seev_zh_CN.ts)
+qt_add_translations(seev TS_FILES seev_es.ts seev_fr.ts seev_zh_CN.ts)
 target_link_libraries(
     seev PRIVATE Qt6::Widgets orie previewer
 )
