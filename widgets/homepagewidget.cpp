@@ -82,7 +82,7 @@ HomePageWidget::HomePageWidget(Previewer *previewer, QWidget *parent)
     setSeevConfPath(seevDefaultConfPath);
     m_orieApp.read_db()
         .add_start_path(orie::str_t())
-        .start_auto_update(std::chrono::seconds(ui->updIntSpin->value()));
+        .start_auto_update(std::chrono::seconds(ui->updIntSpin->value()), false);
 }
 
 void HomePageWidget::fromJsonObj(const QJsonObject& obj) {
@@ -187,8 +187,9 @@ void HomePageWidget::updateDbButClicked() {
     }
 
     m_lastUpdateTime = nowClk;
-    m_orieApp.stop_auto_update();
-    m_orieApp.start_auto_update(std::chrono::seconds(ui->updIntSpin->value()));
+    m_orieApp.stop_auto_update()
+             .start_auto_update(std::chrono::seconds(ui->updIntSpin->value()),
+                                true);
 }
 
 void HomePageWidget::typeOrieCmdButClicked() {

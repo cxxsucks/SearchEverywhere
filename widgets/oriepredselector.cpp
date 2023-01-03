@@ -109,24 +109,31 @@ OriePredSelector::~OriePredSelector() {
     delete ui;
 }
 
-// All string literals end with a space but do not start with one
 QString OriePredSelector::__genPathCommand() const {
     QString res;
     if (ui->strstrPathRadio->isChecked())
-        res = QStringLiteral("-strstr ");
+        res = QStringLiteral("-strstr");
     else if (ui->rgxPathRadio->isChecked())
-        res = QStringLiteral("-bregex ");
+        res = QStringLiteral("-bregex");
     else if (ui->fnmatchRadio->isChecked())
-        res = QStringLiteral("-name ");
+        res = QStringLiteral("-name");
+    else if (ui->fuzzPathRadio->isChecked())
+        res = QStringLiteral("-fuzz --cutoff %1")
+              .arg(ui->fuzzCutPathSpin->value());
 
-    if (ui->icaseBox->isChecked())
-        res += QStringLiteral("--ignore-case ");
+    if (ui->icaseBox->isChecked() && !ui->fuzzPathRadio->isChecked())
+        res += QStringLiteral("--ignore-case");
     if (ui->fullPathBox->isChecked())
-        res += QStringLiteral("--full ");
+        res += QStringLiteral("--full");
     if (ui->lnameBox->isChecked())
-        res += QStringLiteral("--readlink ");
+        res += QStringLiteral("--readlink");
 
-    (res += ui->pathPredEdit->text()) += ' ';
+    if (ui->pathPredEdit->text().contains('`'))
+    // TODO: Prevent expression injection by banning '`' altogether is rude?
+        res += QStringLiteral(" `` -a -false ");
+    else 
+        res += QStringLiteral(" `") += ui->pathPredEdit->text() 
+            += QStringLiteral("` ");
     return res;
 }
 
@@ -138,14 +145,23 @@ QString OriePredSelector::__genContCommand() const {
         res = QStringLiteral("-content-strstr ");
     else if (ui->rgxContRadio->isChecked())
         res = QStringLiteral("-content-regex ");
+    else if (ui->fuzzContRadio->isChecked())
+        res = QStringLiteral("-content-fuzz --cutoff %1 ")
+              .arg(ui->fuzzCutContSpin->value());
 
-    if (ui->icaseContBox->isChecked())
+    if (ui->icaseContBox->isChecked() && !ui->fuzzContRadio->isChecked())
         res += QStringLiteral("--ignore-case ");
     if (!ui->coucurContBox->isChecked())
         res += QStringLiteral("--blocked ");
     if (ui->allowBinContBox->isChecked())
         res += QStringLiteral("--binary ");
-    (res += ui->contPredEdit->text()) += ' ';
+
+    if (ui->contPredEdit->text().contains('`'))
+    // TODO: Prevent expression injection by banning '`' altogether is rude?
+        res += QStringLiteral(" `` -a -false ");
+    else 
+        res += QStringLiteral(" `") += ui->contPredEdit->text() 
+            += QStringLiteral("` ");
     return res;
 }
 
@@ -166,7 +182,9 @@ QString OriePredSelector::__genFileStatCommand() const {
 
     if (ui->absStatRadio->isChecked())
         res += QString::number(ui->absStatSpn->value());
-    else res += ui->targEdit->text();
+    else 
+        res += ui->targEdit->text().contains('`') ? QStringLiteral("``") :
+               ui->targEdit->text();
 
     // MiB KiB and B suffix
     switch (ui->statWhichCbo->currentIndex()) {
