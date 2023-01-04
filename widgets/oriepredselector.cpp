@@ -60,6 +60,7 @@ void OriePredSelector::onPredKindChange(int idx) {
     case 9: // -not
     case 10: // -updir
     case 11: // -downdir
+    case 12: // -prunemod
         ui->condModifBox->setHidden(false); 
         if (qobject_cast<OriePredSelector*>(ui->lhsPredWidg) == nullptr) {
             delete ui->lhsPredWidg;
@@ -100,6 +101,8 @@ QString OriePredSelector::genCommand() const {
         return __genModifCommand(QStringLiteral("-updir"));
     case 11: // -downdir
         return __genModifCommand(QStringLiteral("-downdir"));
+    case 12: // -prunemod
+        return __genModifCommand(QStringLiteral("-prunemod"));
     }
     // Unreachable
     std::terminate();

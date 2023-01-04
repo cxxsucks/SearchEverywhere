@@ -71,6 +71,11 @@
        <string>Match Children</string>
       </property>
      </item>
+     <item>
+      <property name="text">
+       <string>Prune Dir If (Must use with And)</string>
+      </property>
+     </item>
     </widget>
    </item>
    <item>
