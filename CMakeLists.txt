@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(seev VERSION 0.1.1 LANGUAGES CXX)
+project(seev VERSION 0.3.0 LANGUAGES CXX)
 
 add_subdirectory(orient)
 add_subdirectory(assets)
@@ -28,7 +28,24 @@ set(PROJECT_SOURCES
     assets/seev_rsc.qrc
 )
 
-qt_add_executable(seev MANUAL_FINALIZATION ${PROJECT_SOURCES})
+if(APPLE)
+    set(MACOSX_BUNDLE_ICON_FILE stolenLogo.icns)
+    set(app_icon_macos assets/search_img/stolenLogo.icns)
+    set_source_files_properties(${app_icon_macos} PROPERTIES
+                                MACOSX_PACKAGE_LOCATION "Resources")
+    qt_add_executable(seev MANUAL_FINALIZATION 
+                      ${PROJECT_SOURCES} ${app_icon_macos})
+    set_target_properties(seev PROPERTIES
+        MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
+        MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
+        MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
+        MACOSX_BUNDLE TRUE
+        WIN32_EXECUTABLE TRUE
+    )
+else(APPLE)
+    qt_add_executable(seev MANUAL_FINALIZATION ${PROJECT_SOURCES})
+endif(APPLE)
+
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET seev APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
 #                 ${CMAKE_CURRENT_SOURCE_DIR}/android)
@@ -36,14 +53,6 @@ qt_add_executable(seev MANUAL_FINALIZATION ${PROJECT_SOURCES})
 qt_add_translations(seev TS_FILES seev_es.ts seev_fr.ts seev_zh_CN.ts)
 target_link_libraries(
     seev PRIVATE Qt6::Widgets orie previewer
-)
-
-set_target_properties(seev PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    MACOSX_BUNDLE TRUE
-    WIN32_EXECUTABLE TRUE
 )
 
 qt_finalize_executable(seev)

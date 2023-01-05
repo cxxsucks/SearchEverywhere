@@ -4,5 +4,5 @@ install(
 )
 install(
     FILES search_img/stolenLogo.png
-    DESTINATION share/icons/hicolor/128x128/apps
+    DESTINATION share/icons/hicolor/512x512/apps
 )
