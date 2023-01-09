@@ -18,9 +18,10 @@ int main(int argc, char *argv[])
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
+    const QString shareDir = QApplication::applicationDirPath() + "/../share/seev";
     for (const QString &locale : uiLanguages) {
-        const QString baseName = "seev_" + QLocale(locale).name();
-        if (translator.load(baseName)) {
+        QString baseName = "seev_" + QLocale(locale).name();
+        if (translator.load(baseName) || translator.load(baseName, shareDir)) {
             a.installTranslator(&translator);
             break;
         }

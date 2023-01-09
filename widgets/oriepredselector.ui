@@ -201,6 +201,9 @@
         <property name="prefix">
          <string>Cutoff: </string>
         </property>
+        <property name="singleStep">
+         <number>5</number>
+        </property>
         <property name="value">
          <number>80</number>
         </property>
@@ -305,8 +308,11 @@
         <property name="prefix">
          <string>Cutoff: </string>
         </property>
+        <property name="singleStep">
+         <number>5</number>
+        </property>
         <property name="value">
-         <number>90</number>
+         <number>80</number>
         </property>
        </widget>
       </item>
