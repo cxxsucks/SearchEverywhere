@@ -211,6 +211,11 @@
       </item>
       <item row="4" column="0" colspan="2">
        <widget class="QLineEdit" name="pathPredEdit">
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+         </font>
+        </property>
         <property name="placeholderText">
          <string>The Path to Match Against</string>
         </property>
@@ -318,6 +323,11 @@
       </item>
       <item row="4" column="0" colspan="2">
        <widget class="QLineEdit" name="contPredEdit">
+        <property name="font">
+         <font>
+          <family>Monospace</family>
+         </font>
+        </property>
         <property name="placeholderText">
          <string>The Content to Search For</string>
         </property>
@@ -608,6 +618,11 @@
          </item>
          <item row="1" column="1">
           <widget class="QLineEdit" name="targEdit">
+           <property name="font">
+            <font>
+             <family>Monospace</family>
+            </font>
+           </property>
            <property name="placeholderText">
             <string notr="true">/path/to/target</string>
            </property>

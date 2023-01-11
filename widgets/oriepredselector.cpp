@@ -125,11 +125,11 @@ QString OriePredSelector::__genPathCommand() const {
               .arg(ui->fuzzCutPathSpin->value());
 
     if (ui->icaseBox->isChecked() && !ui->fuzzPathRadio->isChecked())
-        res += QStringLiteral("--ignore-case");
+        res += QStringLiteral(" --ignore-case");
     if (ui->fullPathBox->isChecked())
-        res += QStringLiteral("--full");
+        res += QStringLiteral(" --full");
     if (ui->lnameBox->isChecked())
-        res += QStringLiteral("--readlink");
+        res += QStringLiteral(" --readlink");
 
     if (ui->pathPredEdit->text().contains('`'))
     // TODO: Prevent expression injection by banning '`' altogether is rude?
@@ -145,19 +145,19 @@ QString OriePredSelector::__genContCommand() const {
         return QStringLiteral("-true ");
     QString res;
     if (ui->strstrContRadio->isChecked())
-        res = QStringLiteral("-content-strstr ");
+        res = QStringLiteral("-content-strstr");
     else if (ui->rgxContRadio->isChecked())
-        res = QStringLiteral("-content-regex ");
+        res = QStringLiteral("-content-regex");
     else if (ui->fuzzContRadio->isChecked())
-        res = QStringLiteral("-content-fuzz --cutoff %1 ")
+        res = QStringLiteral("-content-fuzz --cutoff %1")
               .arg(ui->fuzzCutContSpin->value());
 
     if (ui->icaseContBox->isChecked() && !ui->fuzzContRadio->isChecked())
-        res += QStringLiteral("--ignore-case ");
+        res += QStringLiteral(" --ignore-case");
     if (!ui->coucurContBox->isChecked())
-        res += QStringLiteral("--blocked ");
+        res += QStringLiteral(" --blocked");
     if (ui->allowBinContBox->isChecked())
-        res += QStringLiteral("--binary ");
+        res += QStringLiteral(" --binary");
 
     if (ui->contPredEdit->text().contains('`'))
     // TODO: Prevent expression injection by banning '`' altogether is rude?
