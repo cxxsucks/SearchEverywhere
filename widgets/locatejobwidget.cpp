@@ -174,6 +174,9 @@ void LocateJobWidget::onIcoPathSel() {
     QString confPath = QFileDialog::getOpenFileName(
         this, tr("Select Icon"), QDir::currentPath(),
         tr("Images (*.png *.xpm *.jpg);;All Files (*)"));
+#ifdef _WIN32
+    confPath.replace(QChar(orie::reverse_sep), QChar(orie::separator));
+#endif
     if (confPath.isEmpty())
         return;
 

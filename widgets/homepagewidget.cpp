@@ -211,6 +211,9 @@ void HomePageWidget::typeOrieCmdButClicked() {
 void HomePageWidget::selSeevConfButClicked() {
     QString confPath = QFileDialog::getOpenFileName(
         this, tr("Select seev Conf File"), QDir::currentPath());
+#ifdef _WIN32
+    confPath.replace(QChar(orie::reverse_sep), QChar(orie::separator));
+#endif
     if (confPath.isEmpty())
         return;
     ui->seevConfPathEdit->setText(confPath);

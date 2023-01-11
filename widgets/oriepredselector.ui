@@ -370,9 +370,6 @@
       </item>
       <item>
        <widget class="QCheckBox" name="executableChk">
-        <property name="toolTip">
-         <string>On Windows &quot;executables&quot; are simply .exe files. (and batch files if you know what they are.)</string>
-        </property>
         <property name="text">
          <string>Executable</string>
         </property>

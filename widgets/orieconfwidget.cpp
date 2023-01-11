@@ -18,6 +18,9 @@ static void __selAndAddPath(QListWidget* lw) {
     if (selPath.isEmpty())
         return;
     selPath = QDir(selPath).canonicalPath();
+#ifdef _WIN32
+    selPath.replace(QChar(orie::reverse_sep), QChar(orie::separator));
+#endif
     if (selPath.contains('`')) {
         QMessageBox::critical(lw, QObject::tr("No Backquote"),
             QObject::tr("Sorry, but current implementation has trouble dealing"
@@ -130,6 +133,9 @@ void StartPathConfDialog::onAddClicked() {
     if (selPath.isEmpty())
         return;
     selPath = QDir(selPath).canonicalPath();
+#ifdef _WIN32
+    selPath.replace(QChar(orie::reverse_sep), QChar(orie::separator));
+#endif
 
     // Check for redundancy
     for (int i = 0; i < ui->startPathLst->count(); ++i) 

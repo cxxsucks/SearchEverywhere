@@ -12,6 +12,10 @@ OriePredSelector::OriePredSelector(QWidget *parent)
     : QWidget(parent), ui(new Ui::OriePredSelector)
 {
     ui->setupUi(this);
+#ifdef _WIN32
+    ui->executableChk->setHidden(true);
+#endif // _WIN32
+
     connect(ui->predKind, &QComboBox::currentIndexChanged,
             this, &OriePredSelector::onPredKindChange);
 

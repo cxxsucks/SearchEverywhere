@@ -9,27 +9,27 @@
         <translation>Añadir punto de partida</translation>
     </message>
     <message>
-        <location filename="widgets/orieconfwidget.cpp" line="22"/>
+        <location filename="widgets/orieconfwidget.cpp" line="25"/>
         <source>No Backquote</source>
         <translation>Sin comillas inversas</translation>
     </message>
     <message>
-        <location filename="widgets/orieconfwidget.cpp" line="23"/>
+        <location filename="widgets/orieconfwidget.cpp" line="26"/>
         <source>Sorry, but current implementation has trouble dealing with paths containing backquotes.</source>
         <translation>Lo sentimos, pero la implementación actual tiene problemas para manejar rutas que contienen comillas inversas.</translation>
     </message>
     <message>
-        <location filename="widgets/orieconfwidget.cpp" line="31"/>
+        <location filename="widgets/orieconfwidget.cpp" line="34"/>
         <source>Path Duplicate</source>
         <translation>Ruta duplicada</translation>
     </message>
     <message>
-        <location filename="widgets/orieconfwidget.cpp" line="32"/>
+        <location filename="widgets/orieconfwidget.cpp" line="35"/>
         <source> has already been added</source>
         <translation> ya ha sido agregado</translation>
     </message>
     <message>
-        <location filename="main.cc" line="40"/>
+        <location filename="main.cc" line="41"/>
         <source>First Time Configuration!
  To start searches, an index must be created. Creating such index scans the entire filesystem from root paths, pruning ignored paths, which can be set here. 
 It is not recommended to remove C:\Windows from ignored path now -- you can do it later.
@@ -40,12 +40,12 @@ No se recomienda eliminar C:\Windows de la ruta ignorada ahora; puede hacerlo m�
 ¿Está bien para ti?</translation>
     </message>
     <message>
-        <location filename="main.cc" line="57"/>
+        <location filename="main.cc" line="58"/>
         <source>Done Configuration</source>
         <translation>Listo Configuración</translation>
     </message>
     <message>
-        <location filename="main.cc" line="58"/>
+        <location filename="main.cc" line="59"/>
         <source>Configuration finished. Wait for first index to finish, which makes the OK button clickable, click it and enjoy!
 This may take several seconds or minutes depending on your disk speed.</source>
         <translation>Configuración finalizada. Espere a que termine el primer índice, lo que hace que se pueda hacer clic en el botón Aceptar, haga clic en él y disfrute.
@@ -56,12 +56,12 @@ Además, la mayoría de estas traducciones las realiza Google Translate, algunas
 <context>
     <name>seev::AppWidget</name>
     <message>
-        <location filename="widgets/homepagewidget.cpp" line="241"/>
+        <location filename="widgets/homepagewidget.cpp" line="245"/>
         <source>Home Page</source>
         <translation>Página de inicio</translation>
     </message>
     <message>
-        <location filename="widgets/homepagewidget.cpp" line="244"/>
+        <location filename="widgets/homepagewidget.cpp" line="248"/>
         <source>SearchEverywhere</source>
         <translation>Buscar en todas partes (SearchEverywhere)</translation>
     </message>
@@ -119,7 +119,7 @@ Además, la mayoría de estas traducciones las realiza Google Translate, algunas
     </message>
     <message>
         <location filename="widgets/homepagewidget.ui" line="112"/>
-        <location filename="widgets/homepagewidget.cpp" line="206"/>
+        <location filename="widgets/homepagewidget.cpp" line="207"/>
         <source>Type `orient` Command (Expert)</source>
         <translation>Escriba el comando `orient` (Experto)</translation>
     </message>
@@ -241,12 +241,12 @@ Too much scanning can only burden your disks more.</source>
 Demasiado escaneo solo puede sobrecargar más sus discos.</translation>
     </message>
     <message>
-        <location filename="widgets/homepagewidget.cpp" line="197"/>
+        <location filename="widgets/homepagewidget.cpp" line="198"/>
         <source>Search with this command</source>
         <translation>Buscar con este comando</translation>
     </message>
     <message>
-        <location filename="widgets/homepagewidget.cpp" line="212"/>
+        <location filename="widgets/homepagewidget.cpp" line="213"/>
         <source>Select seev Conf File</source>
         <translation>Seleccione el archivo de configuración &quot;SearchEverywhere&quot;</translation>
     </message>
@@ -452,135 +452,135 @@ Las rutas raíz e ignoradas PUEDEN superponerse.</translation>
 <context>
     <name>seev::OriePredSelector</name>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="24"/>
+        <location filename="widgets/oriepredselector.ui" line="16"/>
         <source>Always True</source>
         <translation>Siempre cierto</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="29"/>
+        <location filename="widgets/oriepredselector.ui" line="21"/>
         <source>Always False</source>
         <translation>Siempre falso</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="34"/>
+        <location filename="widgets/oriepredselector.ui" line="26"/>
         <source>Path</source>
         <translation>Camino</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="39"/>
-        <location filename="widgets/oriepredselector.ui" line="325"/>
+        <location filename="widgets/oriepredselector.ui" line="31"/>
+        <location filename="widgets/oriepredselector.ui" line="387"/>
         <source>File Type</source>
         <translation>Tipo de archivo</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="44"/>
-        <location filename="widgets/oriepredselector.ui" line="406"/>
+        <location filename="widgets/oriepredselector.ui" line="36"/>
+        <location filename="widgets/oriepredselector.ui" line="468"/>
         <source>File Stat</source>
         <translation>Estadísticas de archivo</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="49"/>
+        <location filename="widgets/oriepredselector.ui" line="41"/>
         <source>File Content</source>
         <translation>Contenido del archivo</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="54"/>
-        <location filename="widgets/oriepredselector.ui" line="280"/>
+        <location filename="widgets/oriepredselector.ui" line="46"/>
+        <location filename="widgets/oriepredselector.ui" line="342"/>
         <source>Accessibility</source>
         <translation>Accesibilidad</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="59"/>
+        <location filename="widgets/oriepredselector.ui" line="51"/>
         <source>And</source>
         <translation>Y</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="64"/>
+        <location filename="widgets/oriepredselector.ui" line="56"/>
         <source>Or</source>
         <translation>O</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="69"/>
+        <location filename="widgets/oriepredselector.ui" line="61"/>
         <source>Inverse</source>
         <translation>Inverso</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="74"/>
+        <location filename="widgets/oriepredselector.ui" line="66"/>
         <source>Match Parent</source>
         <translation>Coincidencia de padres</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="79"/>
+        <location filename="widgets/oriepredselector.ui" line="71"/>
         <source>Match Children</source>
         <translation>Empareja a los niños</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="117"/>
+        <location filename="widgets/oriepredselector.ui" line="114"/>
         <source>Path Match</source>
         <translation>Coincidencia de ruta</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="132"/>
-        <location filename="widgets/oriepredselector.ui" line="220"/>
+        <location filename="widgets/oriepredselector.ui" line="129"/>
+        <location filename="widgets/oriepredselector.ui" line="248"/>
         <source>String</source>
         <translation>Cuerda</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="145"/>
-        <location filename="widgets/oriepredselector.ui" line="233"/>
+        <location filename="widgets/oriepredselector.ui" line="142"/>
+        <location filename="widgets/oriepredselector.ui" line="281"/>
         <source>ICase</source>
         <translation>Ignorar Caso</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="165"/>
+        <location filename="widgets/oriepredselector.ui" line="162"/>
         <source>Full</source>
         <translation>Ruta completa</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="185"/>
+        <location filename="widgets/oriepredselector.ui" line="182"/>
         <source>LName</source>
         <translation>Leer enlace</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="192"/>
+        <location filename="widgets/oriepredselector.ui" line="220"/>
         <source>The Path to Match Against</source>
         <translation>El camino al partido contra</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="202"/>
+        <location filename="widgets/oriepredselector.ui" line="230"/>
         <source>Content Match</source>
         <translation>Coincidencia de contenido</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="240"/>
+        <location filename="widgets/oriepredselector.ui" line="332"/>
         <source>The Content to Search For</source>
         <translation>El contenido a buscar</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="87"/>
+        <location filename="widgets/oriepredselector.ui" line="84"/>
         <source>Condition &amp;&amp; Modifier</source>
         <translation>Modificador de condición &amp;&amp;</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="142"/>
+        <location filename="widgets/oriepredselector.ui" line="139"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do case-insensitive searches when checked.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Note: &lt;/span&gt;On Windows, all glob patterns are case-&lt;span style=&quot; font-weight:700;&quot;&gt;in&lt;/span&gt;sensitive, regardless of whether ignore case is checked.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>Realice búsquedas que no distingan entre mayúsculas y minúsculas cuando esté marcada. 
 Nota: En Windows, todos los patrones globales no distinguen entre mayúsculas y minúsculas, 
 independientemente de si se marca ignorar mayúsculas y minúsculas.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="152"/>
-        <location filename="widgets/oriepredselector.ui" line="247"/>
+        <location filename="widgets/oriepredselector.ui" line="149"/>
+        <location filename="widgets/oriepredselector.ui" line="268"/>
         <source>PCRE2 Regular Expression. Do not use if you do not know what regex is.</source>
         <translation>Expresión regular PCRE2. No lo use si no sabe qué es regex.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="162"/>
+        <location filename="widgets/oriepredselector.ui" line="159"/>
         <source>Search in full path instead of just base name.</source>
         <translation>Busque en la ruta completa en lugar de solo el nombre base.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="172"/>
+        <location filename="widgets/oriepredselector.ui" line="169"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Patterns like &lt;span style=&quot; font-style:italic;&quot;&gt;*.txt &lt;/span&gt;which matches all txt files. &lt;/p&gt;&lt;p&gt;Also support ? (matches a single character) and [] (match a character between).&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Note: &lt;/span&gt;On Windows, all glob patterns are case-&lt;span style=&quot; font-weight:700;&quot;&gt;in&lt;/span&gt;sensitive, regardless of whether ignore case is checked.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>Patrones como *.txt que coincide con todos los archivos txt. 
 ¿También apoyo? (coincide con un solo carácter) y [] (coincide con un carácter intermedio). 
@@ -588,217 +588,240 @@ Nota: En Windows, todos los patrones globales no distinguen entre mayúsculas y 
 independientemente de si se marca ignorar mayúsculas y minúsculas.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="182"/>
+        <location filename="widgets/oriepredselector.ui" line="179"/>
         <source>Match against the pointed-to path of a symlink. Implies `-type l`. DO NOT CHECK if you do not know what a symlink is</source>
         <translation>Coincide con la ruta apuntada de un enlace simbólico. Implica `-tipo l`. NO MARQUE si no sabe qué es un enlace simbólico</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="217"/>
+        <location filename="widgets/oriepredselector.ui" line="245"/>
         <source>Simple string match.</source>
         <translation>Coincidencia de cadena simple.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="230"/>
+        <location filename="widgets/oriepredselector.ui" line="278"/>
         <source>Do case-insensitive match.</source>
         <translation>Haz una coincidencia que no distinga entre mayúsculas y minúsculas.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="257"/>
+        <location filename="widgets/oriepredselector.ui" line="288"/>
         <source>Search for content in multiple threads. Will be significantly faster on SSDs and marginally faster on HDDs, but would likely cause CPU usage to soar. Choose according ro your starting paths.</source>
         <translation>Busque contenido en varios hilos. Será significativamente más rápido en SSD y marginalmente más rápido en HDD, pero probablemente hará que el uso de la CPU se dispare. Elija de acuerdo con sus rutas de inicio.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="260"/>
+        <location filename="widgets/oriepredselector.ui" line="291"/>
         <source>Multithreading</source>
         <translation>Multihilo</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="267"/>
+        <location filename="widgets/oriepredselector.ui" line="258"/>
         <source>Also search for non-plain text file.</source>
         <translation>Busque también un archivo de texto que no sea sin formato.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="270"/>
+        <location filename="widgets/oriepredselector.ui" line="76"/>
+        <source>Prune Dir If (Must use with And)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/oriepredselector.ui" line="189"/>
+        <location filename="widgets/oriepredselector.ui" line="301"/>
+        <source>Fuzzy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/oriepredselector.ui" line="199"/>
+        <location filename="widgets/oriepredselector.ui" line="311"/>
+        <source>Similarity required for a file to show up in fuzzy matching</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/oriepredselector.ui" line="202"/>
+        <location filename="widgets/oriepredselector.ui" line="314"/>
+        <source>Cutoff: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/oriepredselector.ui" line="261"/>
         <source>Allow Binary File</source>
         <translation>Archivo binario</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="295"/>
+        <location filename="widgets/oriepredselector.ui" line="357"/>
         <source>Readable</source>
         <translation>Legible</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="305"/>
+        <location filename="widgets/oriepredselector.ui" line="367"/>
         <source>Writable</source>
         <translation>Escribible</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="312"/>
+        <location filename="widgets/oriepredselector.ui" line="374"/>
         <source>On Windows &quot;executables&quot; are simply .exe files. (and batch files if you know what they are.)</source>
         <translation>En Windows, los &quot;ejecutables&quot; son simplemente archivos .exe. (y archivos por lotes si sabe lo que son)</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="315"/>
+        <location filename="widgets/oriepredselector.ui" line="377"/>
         <source>Executable</source>
         <translation>Ejecutable</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="340"/>
+        <location filename="widgets/oriepredselector.ui" line="402"/>
         <source>Symbolic links. These are NOT .lnk files and if you do not know what a symlink is, chances are that no symlinks exist on your Windows system.</source>
         <translation>Enlaces simbólicos. Estos NO son archivos .lnk y si no sabe qué es un enlace simbólico, lo más probable es que no existan enlaces simbólicos en su sistema Windows.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="343"/>
+        <location filename="widgets/oriepredselector.ui" line="405"/>
         <source>Symlink</source>
         <translation>Enlace simbólico</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="350"/>
+        <location filename="widgets/oriepredselector.ui" line="412"/>
         <source>Regular, non-directory files.</source>
         <translation>Archivos regulares que no son de directorio.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="353"/>
+        <location filename="widgets/oriepredselector.ui" line="415"/>
         <source>Regular</source>
         <translation>Regulares</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="363"/>
+        <location filename="widgets/oriepredselector.ui" line="425"/>
         <source>Or folders as you like to call them.</source>
         <translation>O carpetas como quieras llamarlas.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="366"/>
+        <location filename="widgets/oriepredselector.ui" line="428"/>
         <source>Directory</source>
         <translation>Directorio</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="373"/>
+        <location filename="widgets/oriepredselector.ui" line="435"/>
         <source>FIFO files. Do not exist on Windows.</source>
         <translation>Archivos FIFO. No existe en Windows.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="376"/>
+        <location filename="widgets/oriepredselector.ui" line="438"/>
         <source>Pipe</source>
         <translation>Pipa</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="383"/>
+        <location filename="widgets/oriepredselector.ui" line="445"/>
         <source>Block devices. Do not exist on Windows.</source>
         <translation>Bloquear dispositivos. No existe en Windows.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="386"/>
+        <location filename="widgets/oriepredselector.ui" line="448"/>
         <source>BlockDev</source>
         <translation>bloqueo</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="393"/>
+        <location filename="widgets/oriepredselector.ui" line="455"/>
         <source>Character Devices. Do not exist on Windows.</source>
         <translation>Dispositivos de caracteres. No existe en Windows.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="396"/>
+        <location filename="widgets/oriepredselector.ui" line="458"/>
         <source>CharDev</source>
         <translation>caracteres</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="413"/>
+        <location filename="widgets/oriepredselector.ui" line="475"/>
         <source>Size (MiB)</source>
         <translation>Tamaño(MiB)</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="418"/>
+        <location filename="widgets/oriepredselector.ui" line="480"/>
         <source>Size (KiB)</source>
         <translation>Tamaño(KiB)</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="423"/>
+        <location filename="widgets/oriepredselector.ui" line="485"/>
         <source>Size (B)</source>
         <translation>Tamaño(B)</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="428"/>
+        <location filename="widgets/oriepredselector.ui" line="490"/>
         <source>Accessed Days Before</source>
         <translation>Accedido días antes</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="433"/>
+        <location filename="widgets/oriepredselector.ui" line="495"/>
         <source>Modified Days Before</source>
         <translation>Modificado días antes</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="438"/>
+        <location filename="widgets/oriepredselector.ui" line="500"/>
         <source>Changed Days Before</source>
         <translation>Días antes cambiados</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="443"/>
+        <location filename="widgets/oriepredselector.ui" line="505"/>
         <source>Accessed Minutes Before</source>
         <translation>Accedido minutos antes</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="448"/>
+        <location filename="widgets/oriepredselector.ui" line="510"/>
         <source>Modified Minutes Before</source>
         <translation>Minutos antes modificados</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="453"/>
+        <location filename="widgets/oriepredselector.ui" line="515"/>
         <source>Changed Minutes Before</source>
         <translation>Cambió minutos antes</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="458"/>
+        <location filename="widgets/oriepredselector.ui" line="520"/>
         <source>User ID</source>
         <translation>Identificación de usuario</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="463"/>
+        <location filename="widgets/oriepredselector.ui" line="525"/>
         <source>Group ID</source>
         <translation>ID de grupo</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="468"/>
+        <location filename="widgets/oriepredselector.ui" line="530"/>
         <source>Inode</source>
         <translation>Inodo</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="476"/>
+        <location filename="widgets/oriepredselector.ui" line="538"/>
         <source>Relation</source>
         <translation>Relación</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="498"/>
+        <location filename="widgets/oriepredselector.ui" line="560"/>
         <source>For files, all but size are rounded down to the nearest unit before comparing. Size rounds up</source>
         <translation>Para los archivos, todos menos el tamaño se redondean a la unidad más cercana antes de comparar. El tamaño se redondea hacia arriba</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="518"/>
+        <location filename="widgets/oriepredselector.ui" line="580"/>
         <source>Target</source>
         <translation>Objetivo</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="530"/>
+        <location filename="widgets/oriepredselector.ui" line="592"/>
         <source>When chosen, the respective file stat is compared with the number.</source>
         <translation>Cuando se elige, la estadística del archivo respectivo se compara con el número.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="533"/>
+        <location filename="widgets/oriepredselector.ui" line="595"/>
         <source>Absolute</source>
         <translation>Absoluto</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="550"/>
+        <location filename="widgets/oriepredselector.ui" line="612"/>
         <source>When chosen, the respective file stat is compared with that of the target file.</source>
         <translation>Cuando se elige, la estadística del archivo respectivo se compara con la del archivo de destino.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="553"/>
+        <location filename="widgets/oriepredselector.ui" line="615"/>
         <source>Relative</source>
         <translation>Pariente</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="567"/>
+        <location filename="widgets/oriepredselector.ui" line="634"/>
         <source>Browse Target</source>
         <translation>Explorar destino</translation>
     </message>
@@ -806,22 +829,22 @@ independientemente de si se marca ignorar mayúsculas y minúsculas.</translatio
 <context>
     <name>seev::StartPathConfDialog</name>
     <message>
-        <location filename="widgets/orieconfwidget.cpp" line="129"/>
+        <location filename="widgets/orieconfwidget.cpp" line="132"/>
         <source>Add Starting Point</source>
         <translation>Añadir punto de partida</translation>
     </message>
     <message>
-        <location filename="widgets/orieconfwidget.cpp" line="137"/>
+        <location filename="widgets/orieconfwidget.cpp" line="143"/>
         <source>Redundant Start Point</source>
         <translation>Punto de partida redundante</translation>
     </message>
     <message>
-        <location filename="widgets/orieconfwidget.cpp" line="138"/>
+        <location filename="widgets/orieconfwidget.cpp" line="144"/>
         <source> already covers </source>
         <translation> ya cubierto </translation>
     </message>
     <message>
-        <location filename="widgets/orieconfwidget.cpp" line="139"/>
+        <location filename="widgets/orieconfwidget.cpp" line="145"/>
         <source>
 Therefore the start point being added will be searched for twice</source>
         <translation>

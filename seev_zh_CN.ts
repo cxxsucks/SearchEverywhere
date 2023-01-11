@@ -9,27 +9,27 @@
         <translation>添加起点</translation>
     </message>
     <message>
-        <location filename="widgets/orieconfwidget.cpp" line="22"/>
+        <location filename="widgets/orieconfwidget.cpp" line="25"/>
         <source>No Backquote</source>
         <translation>不支持反引号</translation>
     </message>
     <message>
-        <location filename="widgets/orieconfwidget.cpp" line="23"/>
+        <location filename="widgets/orieconfwidget.cpp" line="26"/>
         <source>Sorry, but current implementation has trouble dealing with paths containing backquotes.</source>
         <translation>抱歉，当前的实现在处理包含反引号的路径时有问题。</translation>
     </message>
     <message>
-        <location filename="widgets/orieconfwidget.cpp" line="31"/>
+        <location filename="widgets/orieconfwidget.cpp" line="34"/>
         <source>Path Duplicate</source>
         <translation>路径重复</translation>
     </message>
     <message>
-        <location filename="widgets/orieconfwidget.cpp" line="32"/>
+        <location filename="widgets/orieconfwidget.cpp" line="35"/>
         <source> has already been added</source>
         <translation> 已经添加</translation>
     </message>
     <message>
-        <location filename="main.cc" line="40"/>
+        <location filename="main.cc" line="41"/>
         <source>First Time Configuration!
  To start searches, an index must be created. Creating such index scans the entire filesystem from root paths, pruning ignored paths, which can be set here. 
 It is not recommended to remove C:\Windows from ignored path now -- you can do it later.
@@ -40,12 +40,12 @@ Is this good for you?</source>
 这适合你吗？</translation>
     </message>
     <message>
-        <location filename="main.cc" line="57"/>
+        <location filename="main.cc" line="58"/>
         <source>Done Configuration</source>
         <translation>完成配置</translation>
     </message>
     <message>
-        <location filename="main.cc" line="58"/>
+        <location filename="main.cc" line="59"/>
         <source>Configuration finished. Wait for first index to finish, which makes the OK button clickable, click it and enjoy!
 This may take several seconds or minutes depending on your disk speed.</source>
         <translation>配置完成。 等待第一个索引完成，这使得 OK 按钮可以点击，点击它就完成了！
@@ -56,12 +56,12 @@ This may take several seconds or minutes depending on your disk speed.</source>
 <context>
     <name>seev::AppWidget</name>
     <message>
-        <location filename="widgets/homepagewidget.cpp" line="241"/>
+        <location filename="widgets/homepagewidget.cpp" line="245"/>
         <source>Home Page</source>
         <translation>首页</translation>
     </message>
     <message>
-        <location filename="widgets/homepagewidget.cpp" line="244"/>
+        <location filename="widgets/homepagewidget.cpp" line="248"/>
         <source>SearchEverywhere</source>
         <translation>到处搜索 (SearchEverywhere)</translation>
     </message>
@@ -118,7 +118,7 @@ This may take several seconds or minutes depending on your disk speed.</source>
     </message>
     <message>
         <location filename="widgets/homepagewidget.ui" line="112"/>
-        <location filename="widgets/homepagewidget.cpp" line="206"/>
+        <location filename="widgets/homepagewidget.cpp" line="207"/>
         <source>Type `orient` Command (Expert)</source>
         <translation>键入 `orient` 命令（专家）</translation>
     </message>
@@ -236,12 +236,12 @@ Too much scanning can only burden your disks more.</source>
 过多的扫描只会增加磁盘的负担。</translation>
     </message>
     <message>
-        <location filename="widgets/homepagewidget.cpp" line="197"/>
+        <location filename="widgets/homepagewidget.cpp" line="198"/>
         <source>Search with this command</source>
         <translation>用这个命令搜索</translation>
     </message>
     <message>
-        <location filename="widgets/homepagewidget.cpp" line="212"/>
+        <location filename="widgets/homepagewidget.cpp" line="213"/>
         <source>Select seev Conf File</source>
         <translation>选择“SearchEverywhere”配置文件</translation>
     </message>
@@ -446,352 +446,375 @@ Root and ignored paths CAN overlap.</source>
 <context>
     <name>seev::OriePredSelector</name>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="24"/>
+        <location filename="widgets/oriepredselector.ui" line="16"/>
         <source>Always True</source>
         <translation>永远正确</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="29"/>
+        <location filename="widgets/oriepredselector.ui" line="21"/>
         <source>Always False</source>
         <translation>永远错误</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="34"/>
+        <location filename="widgets/oriepredselector.ui" line="26"/>
         <source>Path</source>
         <translation>路径</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="39"/>
-        <location filename="widgets/oriepredselector.ui" line="325"/>
+        <location filename="widgets/oriepredselector.ui" line="31"/>
+        <location filename="widgets/oriepredselector.ui" line="387"/>
         <source>File Type</source>
         <translation>文件类型</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="44"/>
-        <location filename="widgets/oriepredselector.ui" line="406"/>
+        <location filename="widgets/oriepredselector.ui" line="36"/>
+        <location filename="widgets/oriepredselector.ui" line="468"/>
         <source>File Stat</source>
         <translation>文件属性</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="49"/>
+        <location filename="widgets/oriepredselector.ui" line="41"/>
         <source>File Content</source>
         <translation>文件内容</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="54"/>
-        <location filename="widgets/oriepredselector.ui" line="280"/>
+        <location filename="widgets/oriepredselector.ui" line="46"/>
+        <location filename="widgets/oriepredselector.ui" line="342"/>
         <source>Accessibility</source>
         <translation>权限</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="59"/>
+        <location filename="widgets/oriepredselector.ui" line="51"/>
         <source>And</source>
         <translation>与</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="64"/>
+        <location filename="widgets/oriepredselector.ui" line="56"/>
         <source>Or</source>
         <translation>或</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="69"/>
+        <location filename="widgets/oriepredselector.ui" line="61"/>
         <source>Inverse</source>
         <translation>非</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="74"/>
+        <location filename="widgets/oriepredselector.ui" line="66"/>
         <source>Match Parent</source>
         <translation>目录</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="79"/>
+        <location filename="widgets/oriepredselector.ui" line="71"/>
         <source>Match Children</source>
         <translation>子文件</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="117"/>
+        <location filename="widgets/oriepredselector.ui" line="114"/>
         <source>Path Match</source>
         <translation>文件名匹配</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="132"/>
-        <location filename="widgets/oriepredselector.ui" line="220"/>
+        <location filename="widgets/oriepredselector.ui" line="129"/>
+        <location filename="widgets/oriepredselector.ui" line="248"/>
         <source>String</source>
         <translation>字符串匹配</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="145"/>
-        <location filename="widgets/oriepredselector.ui" line="233"/>
+        <location filename="widgets/oriepredselector.ui" line="142"/>
+        <location filename="widgets/oriepredselector.ui" line="281"/>
         <source>ICase</source>
         <translation>忽略大小写</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="165"/>
+        <location filename="widgets/oriepredselector.ui" line="162"/>
         <source>Full</source>
         <translation>全路径匹配</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="185"/>
+        <location filename="widgets/oriepredselector.ui" line="182"/>
         <source>LName</source>
         <translation>链接点</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="192"/>
+        <location filename="widgets/oriepredselector.ui" line="220"/>
         <source>The Path to Match Against</source>
         <translation>被匹配的路径</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="202"/>
+        <location filename="widgets/oriepredselector.ui" line="230"/>
         <source>Content Match</source>
         <translation>文件内容匹配</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="240"/>
+        <location filename="widgets/oriepredselector.ui" line="332"/>
         <source>The Content to Search For</source>
         <translation>查找文件内容</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="87"/>
+        <location filename="widgets/oriepredselector.ui" line="84"/>
         <source>Condition &amp;&amp; Modifier</source>
         <translation>与或非以及父子</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="142"/>
+        <location filename="widgets/oriepredselector.ui" line="139"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Do case-insensitive searches when checked.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Note: &lt;/span&gt;On Windows, all glob patterns are case-&lt;span style=&quot; font-weight:700;&quot;&gt;in&lt;/span&gt;sensitive, regardless of whether ignore case is checked.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;勾选后则匹配不分大小写&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;注意 &lt;/span&gt;
 在Windows，所有的通配符表达式都&lt;span style=&quot; font-weight:700;&quot;&gt;不&lt;/span&gt;区分大小写，不论是否勾选。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="152"/>
-        <location filename="widgets/oriepredselector.ui" line="247"/>
+        <location filename="widgets/oriepredselector.ui" line="149"/>
+        <location filename="widgets/oriepredselector.ui" line="268"/>
         <source>PCRE2 Regular Expression. Do not use if you do not know what regex is.</source>
         <translation>PCRE2正则表达式。如果不知道什么是正则表达式不要勾选。</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="162"/>
+        <location filename="widgets/oriepredselector.ui" line="159"/>
         <source>Search in full path instead of just base name.</source>
         <translation>匹配整个路径而不只是文件名。</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="172"/>
+        <location filename="widgets/oriepredselector.ui" line="169"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Patterns like &lt;span style=&quot; font-style:italic;&quot;&gt;*.txt &lt;/span&gt;which matches all txt files. &lt;/p&gt;&lt;p&gt;Also support ? (matches a single character) and [] (match a character between).&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;Note: &lt;/span&gt;On Windows, all glob patterns are case-&lt;span style=&quot; font-weight:700;&quot;&gt;in&lt;/span&gt;sensitive, regardless of whether ignore case is checked.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;类似于&lt;span style=&quot; font-style:italic;&quot;&gt;*.txt &lt;/span&gt;
 的通配符串，该串匹配所有txt文件 &lt;/p&gt;&lt;p&gt;同时支持?匹配任意一个字符以及 [] 匹配其中之一字符.&lt;/p&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;注意 &lt;/span&gt;
 在Windows，所有的通配符表达式都&lt;span style=&quot; font-weight:700;&quot;&gt;不&lt;/span&gt;区分大小写。&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="182"/>
+        <location filename="widgets/oriepredselector.ui" line="179"/>
         <source>Match against the pointed-to path of a symlink. Implies `-type l`. DO NOT CHECK if you do not know what a symlink is</source>
         <translation>匹配符号链接指向的文件名。只匹配符号链接。
 不知道符号链接不要勾选</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="217"/>
+        <location filename="widgets/oriepredselector.ui" line="245"/>
         <source>Simple string match.</source>
         <translation>简单字符串匹配.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="230"/>
+        <location filename="widgets/oriepredselector.ui" line="278"/>
         <source>Do case-insensitive match.</source>
         <translation>忽略大小写.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="257"/>
+        <location filename="widgets/oriepredselector.ui" line="288"/>
         <source>Search for content in multiple threads. Will be significantly faster on SSDs and marginally faster on HDDs, but would likely cause CPU usage to soar. Choose according ro your starting paths.</source>
         <translation>多线程内容查找。在SSD上会快很多，HDD上快一点，但是会大大增加CPU占用。根据起始路径的挂载点选择。</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="260"/>
+        <location filename="widgets/oriepredselector.ui" line="291"/>
         <source>Multithreading</source>
         <translation>多线程</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="267"/>
+        <location filename="widgets/oriepredselector.ui" line="258"/>
         <source>Also search for non-plain text file.</source>
         <translation>也查找非文本文件.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="270"/>
+        <location filename="widgets/oriepredselector.ui" line="76"/>
+        <source>Prune Dir If (Must use with And)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/oriepredselector.ui" line="189"/>
+        <location filename="widgets/oriepredselector.ui" line="301"/>
+        <source>Fuzzy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/oriepredselector.ui" line="199"/>
+        <location filename="widgets/oriepredselector.ui" line="311"/>
+        <source>Similarity required for a file to show up in fuzzy matching</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/oriepredselector.ui" line="202"/>
+        <location filename="widgets/oriepredselector.ui" line="314"/>
+        <source>Cutoff: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="widgets/oriepredselector.ui" line="261"/>
         <source>Allow Binary File</source>
         <translation>非纯文本</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="295"/>
+        <location filename="widgets/oriepredselector.ui" line="357"/>
         <source>Readable</source>
         <translation>可读</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="305"/>
+        <location filename="widgets/oriepredselector.ui" line="367"/>
         <source>Writable</source>
         <translation>可写</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="312"/>
+        <location filename="widgets/oriepredselector.ui" line="374"/>
         <source>On Windows &quot;executables&quot; are simply .exe files. (and batch files if you know what they are.)</source>
         <translation>Windows下可执行就是exe文件（也包括批处理文件，如果你知道这是什么）</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="315"/>
+        <location filename="widgets/oriepredselector.ui" line="377"/>
         <source>Executable</source>
         <translation>可执行</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="340"/>
+        <location filename="widgets/oriepredselector.ui" line="402"/>
         <source>Symbolic links. These are NOT .lnk files and if you do not know what a symlink is, chances are that no symlinks exist on your Windows system.</source>
         <translation>符号链接不是.lnk快捷方式，如果你不知道符号链接是什么，那么你的Windows系统上应该没有符号链接。</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="343"/>
+        <location filename="widgets/oriepredselector.ui" line="405"/>
         <source>Symlink</source>
         <translation>符号链接</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="350"/>
+        <location filename="widgets/oriepredselector.ui" line="412"/>
         <source>Regular, non-directory files.</source>
         <translation>普通，非目录文件.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="353"/>
+        <location filename="widgets/oriepredselector.ui" line="415"/>
         <source>Regular</source>
         <translation>普通文件</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="363"/>
+        <location filename="widgets/oriepredselector.ui" line="425"/>
         <source>Or folders as you like to call them.</source>
         <translation>更多人称之为文件夹.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="366"/>
+        <location filename="widgets/oriepredselector.ui" line="428"/>
         <source>Directory</source>
         <translation>目录</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="373"/>
+        <location filename="widgets/oriepredselector.ui" line="435"/>
         <source>FIFO files. Do not exist on Windows.</source>
         <translation>管道文件，Windows上不存在.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="376"/>
+        <location filename="widgets/oriepredselector.ui" line="438"/>
         <source>Pipe</source>
         <translation>管道</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="383"/>
+        <location filename="widgets/oriepredselector.ui" line="445"/>
         <source>Block devices. Do not exist on Windows.</source>
         <translation>块设备文件，Windows上不存在.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="386"/>
+        <location filename="widgets/oriepredselector.ui" line="448"/>
         <source>BlockDev</source>
         <translation>块设备</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="393"/>
+        <location filename="widgets/oriepredselector.ui" line="455"/>
         <source>Character Devices. Do not exist on Windows.</source>
         <translation>字符设备文件，Windows上不存在.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="396"/>
+        <location filename="widgets/oriepredselector.ui" line="458"/>
         <source>CharDev</source>
         <translation>字符设备</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="413"/>
+        <location filename="widgets/oriepredselector.ui" line="475"/>
         <source>Size (MiB)</source>
         <translation>大小MiB</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="418"/>
+        <location filename="widgets/oriepredselector.ui" line="480"/>
         <source>Size (KiB)</source>
         <translation>大小KiB</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="423"/>
+        <location filename="widgets/oriepredselector.ui" line="485"/>
         <source>Size (B)</source>
         <translation>大小B</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="428"/>
+        <location filename="widgets/oriepredselector.ui" line="490"/>
         <source>Accessed Days Before</source>
         <translation>几天前访问</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="433"/>
+        <location filename="widgets/oriepredselector.ui" line="495"/>
         <source>Modified Days Before</source>
         <translation>几天前修改</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="438"/>
+        <location filename="widgets/oriepredselector.ui" line="500"/>
         <source>Changed Days Before</source>
         <translation>几天前属性改变</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="443"/>
+        <location filename="widgets/oriepredselector.ui" line="505"/>
         <source>Accessed Minutes Before</source>
         <translation>几分钟前访问</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="448"/>
+        <location filename="widgets/oriepredselector.ui" line="510"/>
         <source>Modified Minutes Before</source>
         <translation>几分钟前修改</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="453"/>
+        <location filename="widgets/oriepredselector.ui" line="515"/>
         <source>Changed Minutes Before</source>
         <translation>几分钟前属性改变</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="458"/>
+        <location filename="widgets/oriepredselector.ui" line="520"/>
         <source>User ID</source>
         <translation>用户ID</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="463"/>
+        <location filename="widgets/oriepredselector.ui" line="525"/>
         <source>Group ID</source>
         <translation>组ID</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="468"/>
+        <location filename="widgets/oriepredselector.ui" line="530"/>
         <source>Inode</source>
         <translation>索引结点号</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="476"/>
+        <location filename="widgets/oriepredselector.ui" line="538"/>
         <source>Relation</source>
         <translation>关系</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="498"/>
+        <location filename="widgets/oriepredselector.ui" line="560"/>
         <source>For files, all but size are rounded down to the nearest unit before comparing. Size rounds up</source>
         <translation>对于文件，除了大小外的属性向下取整，大小向上取整</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="518"/>
+        <location filename="widgets/oriepredselector.ui" line="580"/>
         <source>Target</source>
         <translation>目标</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="530"/>
+        <location filename="widgets/oriepredselector.ui" line="592"/>
         <source>When chosen, the respective file stat is compared with the number.</source>
         <translation>选择后，文件对应的属性与这个数字比较.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="533"/>
+        <location filename="widgets/oriepredselector.ui" line="595"/>
         <source>Absolute</source>
         <translation>绝对</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="550"/>
+        <location filename="widgets/oriepredselector.ui" line="612"/>
         <source>When chosen, the respective file stat is compared with that of the target file.</source>
         <translation>选择后，文件对应的属性与目标文件的这个属性比较.</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="553"/>
+        <location filename="widgets/oriepredselector.ui" line="615"/>
         <source>Relative</source>
         <translation>相对</translation>
     </message>
     <message>
-        <location filename="widgets/oriepredselector.ui" line="567"/>
+        <location filename="widgets/oriepredselector.ui" line="634"/>
         <source>Browse Target</source>
         <translation>选择目标</translation>
     </message>
@@ -799,22 +822,22 @@ Root and ignored paths CAN overlap.</source>
 <context>
     <name>seev::StartPathConfDialog</name>
     <message>
-        <location filename="widgets/orieconfwidget.cpp" line="129"/>
+        <location filename="widgets/orieconfwidget.cpp" line="132"/>
         <source>Add Starting Point</source>
         <translation>增加起点</translation>
     </message>
     <message>
-        <location filename="widgets/orieconfwidget.cpp" line="137"/>
+        <location filename="widgets/orieconfwidget.cpp" line="143"/>
         <source>Redundant Start Point</source>
         <translation>起点冗余</translation>
     </message>
     <message>
-        <location filename="widgets/orieconfwidget.cpp" line="138"/>
+        <location filename="widgets/orieconfwidget.cpp" line="144"/>
         <source> already covers </source>
         <translation> 已经覆盖 </translation>
     </message>
     <message>
-        <location filename="widgets/orieconfwidget.cpp" line="139"/>
+        <location filename="widgets/orieconfwidget.cpp" line="145"/>
         <source>
 Therefore the start point being added will be searched for twice</source>
         <translation>
