@@ -26,6 +26,7 @@ set(seev_src
     widgets/startpathconfwidget.ui
     util/fileinfomodel.cpp util/fileinfomodel.hpp
     assets/seev_rsc.qrc
+    assets/win_ico.rc
 )
 
 if(APPLE)
@@ -42,9 +43,11 @@ if(APPLE)
         MACOSX_BUNDLE TRUE
         WIN32_EXECUTABLE TRUE
     )
-else(APPLE)
+elseif(WIN32)
+    qt_add_executable(seev WIN32 MANUAL_FINALIZATION ${seev_src})
+else()
     qt_add_executable(seev MANUAL_FINALIZATION ${seev_src})
-endif(APPLE)
+endif()
 
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET seev APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

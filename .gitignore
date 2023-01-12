@@ -1,7 +1,10 @@
+orient
+
 .vs*
 **/.vs*
 *.user
 **/*.user
+*.aps
 
 bin
 out
