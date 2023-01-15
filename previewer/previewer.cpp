@@ -3,7 +3,7 @@
 
 #include "imagePreviewer/imagepreviewer.h"
 #ifdef _SEEV_PREVIEW_MEDIA
-#include "mediaPreviewer/mediapreviewer.h"
+#include "mediaPreviewer/mediapreviewer.hpp"
 #endif
 
 #include <QtCore/QMimeDatabase>

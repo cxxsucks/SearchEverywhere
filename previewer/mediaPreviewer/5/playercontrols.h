@@ -48,70 +48,62 @@
 **
 ****************************************************************************/
 
-#ifndef PLAYER_BAD_H
-#define PLAYER_BAD_H
+#ifndef PLAYERCONTROLS_H
+#define PLAYERCONTROLS_H
 
-#include <QWidget>
 #include <QMediaPlayer>
-#include <QMediaMetaData>
+#include <QWidget>
 
 QT_BEGIN_NAMESPACE
-class QAbstractItemView;
-class QLabel;
-class QMediaPlayer;
-class QMediaPlaylist;
-class QModelIndex;
-class QPushButton;
+class QAbstractButton;
+class QAbstractSlider;
 class QComboBox;
-class QSlider;
-class QStatusBar;
-class QVideoWidget;
 QT_END_NAMESPACE
 
-class MediaPreviewer : public QWidget
+class PlayerControls : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit MediaPreviewer(QWidget *parent = nullptr);
-    ~MediaPreviewer() = default;
+    explicit PlayerControls(QWidget *parent = nullptr);
 
-    bool isPlayerAvailable() const;
+    QMediaPlayer::State state() const;
+    int volume() const;
+    bool isMuted() const;
+    qreal playbackRate() const;
 
-    void addToPlaylist(const QUrl &url);
+public slots:
+    void setState(QMediaPlayer::State state);
+    void setVolume(int volume);
+    void setMuted(bool muted);
+    void setPlaybackRate(float rate);
 
 signals:
-    void fullScreenChanged(bool fullScreen);
+    void play();
+    void pause();
+    void stop();
+    void next();
+    void previous();
+    void changeVolume(int volume);
+    void changeMuting(bool muting);
+    void changeRate(qreal rate);
 
 private slots:
-    void durationChanged(qint64 duration);
-    void positionChanged(qint64 progress);
-    void metaDataIdxChanged(int idx);
-
-    void previousClicked();
-
-    void seek(int mseconds);
-
-    void statusChanged(QMediaPlayer::MediaStatus status);
-    void videoAvailableChanged(bool available);
+    void playClicked();
+    void muteClicked();
+    void updateRate();
+    void onVolumeSliderValueChanged();
 
 private:
-    void handleCursor(QMediaPlayer::MediaStatus status);
-    void updateDurationInfo(qint64 currentInfo);
-
-    QMediaPlayer* m_player;
-    QAudioOutput* m_audioOutput;
-    QVideoWidget* m_videoWidget;
-    QSlider* m_slider;
-    QLabel* m_labelDuration;
-    QPushButton* m_fullScreenButton;
-    QLabel* m_statusLabel;
-    QStatusBar* m_statusBar;
-
-    qint64 m_duration;
-
-    QComboBox* m_metaDataFieldCbo;
-    QLabel* m_metaDataLabel;
+    QMediaPlayer::State m_playerState = QMediaPlayer::StoppedState;
+    bool m_playerMuted = false;
+    QAbstractButton *m_playButton = nullptr;
+    QAbstractButton *m_stopButton = nullptr;
+    QAbstractButton *m_nextButton = nullptr;
+    QAbstractButton *m_previousButton = nullptr;
+    QAbstractButton *m_muteButton = nullptr;
+    QAbstractSlider *m_volumeSlider = nullptr;
+    QComboBox *m_rateBox = nullptr;
 };
 
-#endif // PLAYER_BAD_H
+#endif // PLAYERCONTROLS_H

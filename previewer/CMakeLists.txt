@@ -19,15 +19,15 @@ if(SEEV_PREVIEW_MEDIA)
     find_package(Qt${QT_VERSION_MAJOR} COMPONENTS
                  Multimedia MultimediaWidgets REQUIRED)
     add_compile_definitions(_SEEV_PREVIEW_MEDIA)
-    set(PREVIEWER_SRC
-        mediaPreviewer/mediapreviewer.cpp
-        mediaPreviewer/playercontrols.cpp
-        mediaPreviewer/videowidget.cpp
-        mediaPreviewer/mediapreviewer.h
-        mediaPreviewer/playercontrols.h
-        mediaPreviewer/videowidget.h
-        ${PREVIEWER_SRC}
+    set(s mediaPreviewer/${QT_VERSION_MAJOR})
+
+    # videowidget.cpp is the same across 5 and 6
+    set(PREVIEWER_SRC ${PREVIEWER_SRC}
+        ${s}/mediapreviewer.cpp ${s}/playercontrols.cpp
+        ${s}/../videowidget.cpp ${s}/mediapreviewer.h
+        ${s}/playercontrols.h ${s}/../videowidget.h
     )
+    unset(s)
 endif(SEEV_PREVIEW_MEDIA)
 
 add_library(previewer ${PREVIEWER_SRC})
