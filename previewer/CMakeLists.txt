@@ -11,12 +11,13 @@ set(PREVIEWER_SRC
     imagePreviewer/imagepreviewer.h
 )
 
-find_package(QT NAMES Qt6 COMPONENTS Widgets REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 
 option(SEEV_PREVIEW_MEDIA "Preview Multimedia files in search result" OFF)
 
 if(SEEV_PREVIEW_MEDIA)
-    find_package(Qt6 COMPONENTS Multimedia MultimediaWidgets REQUIRED)
+    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS
+                 Multimedia MultimediaWidgets REQUIRED)
     add_compile_definitions(_SEEV_PREVIEW_MEDIA)
     set(PREVIEWER_SRC
         mediaPreviewer/mediapreviewer.cpp
@@ -29,11 +30,12 @@ if(SEEV_PREVIEW_MEDIA)
     )
 endif(SEEV_PREVIEW_MEDIA)
 
-add_library(previewer
-    ${PREVIEWER_SRC}
-)
+add_library(previewer ${PREVIEWER_SRC})
 
 if(SEEV_PREVIEW_MEDIA)
-    target_link_libraries(previewer PRIVATE Qt6::Multimedia Qt6::MultimediaWidgets)
+    target_link_libraries(previewer PRIVATE 
+        Qt${QT_VERSION_MAJOR}::Multimedia
+        Qt${QT_VERSION_MAJOR}::MultimediaWidgets
+    )
 endif(SEEV_PREVIEW_MEDIA)
-target_link_libraries(previewer PRIVATE Qt6::Widgets)
+target_link_libraries(previewer PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)

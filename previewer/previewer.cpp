@@ -10,13 +10,15 @@
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
 #include <QtCore/QProcess>
+#include <QtCore/QDateTime>
 #include <QtGui/QClipboard>
 #include <QtGui/QDesktopServices>
 #include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QFileDialog>
-#include <QtGui/QFileSystemModel>
 #include <QtWidgets/QTreeView>
+// Qt5 is in QtWidgets/QFileSystemModel, 6 in QtGui
+#include <QFileSystemModel>
 
 namespace seev {
 Previewer::Previewer(QWidget *parent, const QString& soffice,bool hasOpen)

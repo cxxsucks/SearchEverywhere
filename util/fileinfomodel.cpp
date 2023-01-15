@@ -1,4 +1,5 @@
 #include "fileinfomodel.hpp"
+#include <QtCore/QDateTime>
 #include <QtWidgets/QFileIconProvider>
 
 namespace seev {
@@ -10,7 +11,12 @@ bool FileinfoModel::insertRows(int row, int count, const QModelIndex &par) {
     if (row > infos.size() || row < 0 || count <= 0)
         return false;
     beginInsertRows(par, row, row + count - 1);
+#if QT_VERSION_MAJOR >= 6
     infos.insert(row, count, QFileInfo());
+#else // Very inefficient insertion in Qt5 :(
+    for (int i = 0; i < count; ++i)
+        infos.insert(row, QFileInfo());
+#endif
     endInsertRows();
     return true;
 }
@@ -19,7 +25,11 @@ bool FileinfoModel::removeRows(int row, int count, const QModelIndex &par) {
     if (row < 0 || count <= 0 || row + count > infos.size())
         return false;
     beginRemoveRows(par, row, row + count - 1);
+#if QT_VERSION_MAJOR >= 6
     infos.remove(row, count);
+#else
+    infos.erase(infos.begin() + row, infos.begin() + count);
+#endif
     endRemoveRows();
     return true;
 }

@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
         if (confDoneBox.exec() != QMessageBox::Ok) {
             // Indexing cancellation requested, but we cannot cancel thread
             // execution, therefore simply restart the program.
-            QProcess::startDetached(argv[0]);
+            QProcess::startDetached(argv[0], QStringList());
             _exit(1);
         }
         updateThread.join();

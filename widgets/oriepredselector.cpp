@@ -16,8 +16,13 @@ OriePredSelector::OriePredSelector(QWidget *parent)
     ui->executableChk->setHidden(true);
 #endif // _WIN32
 
+#if QT_VERSION_MAJOR >= 6
     connect(ui->predKind, &QComboBox::currentIndexChanged,
             this, &OriePredSelector::onPredKindChange);
+#else // Qt5 has a deprecated overloaded currentIndexChanged
+    connect(ui->predKind, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(onPredKindChange(int)));
+#endif
 
     // By default match path
     ui->predKind->setCurrentIndex(2);

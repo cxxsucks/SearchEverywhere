@@ -1,9 +1,6 @@
 #include "imagepreviewer.h"
 #include <QtWidgets/QLabel>
 #include <QtCore/QMimeDatabase>
-#ifdef _ORIEA_PREVIEW_PDF
-#include <QtPdf/QPdfDocument>
-#endif
 
 ImagePreviewer::ImagePreviewer(QWidget *parent)
     : QWidget(parent), m_viewing(new QLabel(this))
@@ -14,11 +11,22 @@ ImagePreviewer::ImagePreviewer(QWidget *parent)
 }
 
 void ImagePreviewer::resizeEvent(QResizeEvent *) {
+#if QT_VERSION_MAJOR >= 6
     if (m_viewing->pixmap().isNull())
         return;
     double wScl = static_cast<double>(width()) / m_viewing->pixmap().width();
     double hScl = static_cast<double>(height()) / m_viewing->pixmap().height();
     m_viewing->resize(std::min(wScl, hScl) * m_viewing->pixmap().size());
+#else
+    if (m_viewing->pixmap(Qt::ReturnByValue).isNull())
+        return;
+    double wScl = static_cast<double>(width()) /
+        m_viewing->pixmap(Qt::ReturnByValue).width();
+    double hScl = static_cast<double>(height()) /
+        m_viewing->pixmap(Qt::ReturnByValue).height();
+    m_viewing->resize(std::min(wScl, hScl) *
+        m_viewing->pixmap(Qt::ReturnByValue).size());
+#endif
 
     m_viewing->move((width() - m_viewing->width()) / 2,
                     (height() - m_viewing->height()) / 2);

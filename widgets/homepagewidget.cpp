@@ -153,7 +153,7 @@ void HomePageWidget::setSeevConfPath(const QString &path) {
 
     // Read the seev configuration
     QFile confStream(path);
-    confStream.open(QIODeviceBase::ReadOnly);
+    confStream.open(QIODevice::ReadOnly);
     // Set the internals 
     fromJsonObj(QJsonDocument::fromJson(confStream.readAll()).object());
 }
@@ -172,7 +172,7 @@ HomePageWidget::~HomePageWidget()
     QJsonDocument seevConf;
     seevConf.setObject(toJsonObj());
     QFile confStream(ui->seevConfPathEdit->text());
-    confStream.open(QIODeviceBase::WriteOnly);
+    confStream.open(QIODevice::WriteOnly);
     confStream.write(seevConf.toJson());
     delete ui;
 }
