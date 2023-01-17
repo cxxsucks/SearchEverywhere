@@ -91,9 +91,8 @@ in order to preview them:
 - Rendering Markdown files
 - Multimedia files like `.mp{3,4} .mov`
     > Require `SEEV_PREVIEW_MEDIA` option be set compile-time  
-    > Only Windows precompiled binary has it set for compatibility reason
-    > on Linux and macOS🥹, therefore no media previewing unless manual
-    > compilation from source on these platforms.
+    > Qt Multimedia does not run my antique MacBook🥹, therefore no media
+    > previewing unless manual compilation from source on macOS.
 - First page of PDF files
 - First page of Office files provided that LibreOffice is installed in PATH
     > ~~which is silly since `orient` is well capable of locating office~~
@@ -213,8 +212,7 @@ Grab the precompiled binary from Release and they should work.
 Windows version additionally requires
 [MSVC Runtime](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist)
 
-Unfortunalely Linux AppImage and macOS dmg do not support previewing
-multimedia😭  
+Unfortunalely macOS dmg do not support previewing multimedia😭  
 The macOS ARM version is missing since I don't have one such machine🫥.
 Feel free to report whether it works on issue or discussion.
 > Currently this app is too little-tested to release to a distribution.  
@@ -256,6 +254,10 @@ cmake -DOPTION1=ON -DOPTION2=ON -DCMAKE_BUILD_TYPE=Release ..
 make -j$(nproc)
 sudo make install
 ```
+
+### Build Linux AppImage
+
+TODO (not as easy as it may seem due to Qt deployment plugin bug)
 
 ## Credits
 
