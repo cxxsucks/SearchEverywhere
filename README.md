@@ -244,6 +244,9 @@ Configure Options:
 - `ORIE_LINK_STATIC`: Statically link orient executable
 - `ORIE_SYSTEM_RAPIDFUZZ`: Use System rapidfuzz Library (header only)
 
+> `rapidfuzz` has some issues with building as sub project so
+> `SEEV_SYSTEM_ORIENT` is not stable (yet).
+
 Replace the `OPTION` below with your enabled options, and run the
 following commands:
 

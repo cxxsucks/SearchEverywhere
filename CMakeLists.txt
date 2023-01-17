@@ -1,11 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-
-project(seev VERSION 0.3.0 LANGUAGES CXX)
-
-add_subdirectory(orient)
-add_subdirectory(assets)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/orient/include)
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
+project(seev VERSION 0.3.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -16,6 +10,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
 add_subdirectory(previewer)
+add_subdirectory(assets)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+option(SEEV_SYSTEM_ORIENT "Use System orient Library" OFF)
+if (NOT SEEV_SYSTEM_ORIENT)
+    include(FetchContent)
+    FetchContent_Declare(orient
+        GIT_REPOSITORY https://github.com/cxxsucks/orient
+        GIT_TAG master)
+    FetchContent_MakeAvailable(orient)
+else(NOT SEEV_SYSTEM_ORIENT)
+    find_package(orie REQUIRED)
+endif(NOT SEEV_SYSTEM_ORIENT)
 
 set(seev_src
     main.cc
@@ -76,7 +83,8 @@ set_target_properties(seev PROPERTIES
     WIN32_EXECUTABLE TRUE
 )
 
-target_link_libraries(seev PRIVATE Qt${QT_VERSION_MAJOR}::Widgets orie previewer)
+target_link_libraries(seev PRIVATE
+                      Qt${QT_VERSION_MAJOR}::Widgets orie::orie previewer)
 
 if(${QT_VERSION_MAJOR} EQUAL 6)
     qt_finalize_executable(seev)
