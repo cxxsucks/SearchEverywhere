@@ -7,7 +7,7 @@ First Fully-Libre GUI File Indexer on macOS and Windows:
 whose name clashed with mine LOL.
 
 **IMPORTANT**: This README is about the GUI frontend of `orient`.  
-For the CLI and the library, see [orient](https://github.com/ccPlus/orient).  
+For the CLI and the library, see [orient](https://github.com/cxxsucks/orient).  
 Complete list of features/strengthes/weaknesses unrelated to GUI like
 performance and `find` compatibility are also there.
 
@@ -67,7 +67,7 @@ Notes:
 ## GUI Features
 
 Only GUI features are listed here. Non-GUI related features are in
-[orient CLI](https://github.com/ccPlus/orient) documentation.
+[orient CLI](https://github.com/cxxsucks/orient) documentation.
 
 ### Previewing Content
 
@@ -251,7 +251,7 @@ Replace the `OPTION` below with your enabled options, and run the
 following commands:
 
 ```sh
-git clone https://github.com/ccPlus/SearchEverywhere.git
+git clone https://github.com/cxxsucks/SearchEverywhere.git
 cd orient; mkdir build; cd build
 cmake -DOPTION1=ON -DOPTION2=ON -DCMAKE_BUILD_TYPE=Release ..
 make -j$(nproc)
