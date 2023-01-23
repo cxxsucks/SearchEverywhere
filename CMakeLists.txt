@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(seev VERSION 0.3.1 LANGUAGES CXX)
+enable_language(CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -24,6 +24,7 @@ else(NOT SEEV_SYSTEM_ORIENT)
     find_package(orie REQUIRED)
 endif(NOT SEEV_SYSTEM_ORIENT)
 
+project(seev VERSION 0.3.1)
 set(seev_src
     main.cc
     widgets/homepagewidget.cpp widgets/homepagewidget.hpp widgets/homepagewidget.ui
