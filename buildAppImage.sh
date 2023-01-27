@@ -2,14 +2,7 @@
 set -x
 set -e
 
-# building in temporary directory to keep system clean
-# use RAM disk if possible (as in: not building on CI system like Travis, and RAM disk is available)
-if [ "$CI" == "" ] && [ -d /dev/shm ]; then
-    TEMP_BASE=/dev/shm
-else
-    TEMP_BASE=/tmp
-fi
-
+TEMP_BASE=/tmp
 BUILD_DIR=$(mktemp -d -p "$TEMP_BASE" appimage-build-XXXXXX)
 
 # make sure to clean up build dir, even if errors occur
@@ -38,16 +31,13 @@ popd
 # switch to build dir
 pushd "$BUILD_DIR"
 
-# configure gui build files with CMake
+# configure seev build files with CMake
 cmake -DCMAKE_BUILD_TYPE:STRING=Release \
     "$@" -DCMAKE_INSTALL_PREFIX=/usr "${REPO_ROOT}"
     
 # build gui and install files into AppDir
 make "-j$(nproc)"
 make install DESTDIR=AppDir
-# Not needed for seev executable
-rm AppDir/usr/bin/orient AppDir/usr/lib/liborie.a
-rm -r AppDir/usr/include
 
 # initialize AppDir, bundle shared libraries, use Qt plugin to bundle additional resources, and build AppImage, all in one single command
 "$OLD_CWD"/build/linuxdeploy-x86_64.AppImage --appdir AppDir --plugin qt --output appimage

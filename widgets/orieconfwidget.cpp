@@ -3,6 +3,7 @@
 #include "ui_startpathconfwidget.h"
 #include <orient/app.hpp>
 
+#include <QtCore/QDebug>
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
 
