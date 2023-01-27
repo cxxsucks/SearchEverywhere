@@ -80,7 +80,7 @@ HomePageWidget::HomePageWidget(Previewer *previewer, QWidget *parent)
 
     // Always launch with default seev configuration path
     setSeevConfPath(seevDefaultConfPath);
-    m_orieApp.read_db()
+    m_orieApp
         .add_start_path(orie::str_t())
         .start_auto_update(std::chrono::seconds(ui->updIntSpin->value()), false);
 }
@@ -88,9 +88,12 @@ HomePageWidget::HomePageWidget(Previewer *previewer, QWidget *parent)
 void HomePageWidget::fromJsonObj(const QJsonObject& obj) {
     QString orieConfPath = obj["orieConfPath"].toString(orieDefaultConfPath);
     // Write default configuration if the specified orie conf file does not exist
-    if (!m_orieApp.read_conf(orieConfPath.toStdString())) {
+    try {
+        m_orieApp.read_conf(orieConfPath.toStdString());
+    } catch (std::runtime_error& e) {
+        qDebug() << orieConfPath << " " << e.what();
+        qDebug() << tr("Initializing default configuation.");
         m_orieApp = orie::app::os_default(m_pool);
-        // TODO: Auto update stops here!
         m_orieApp.write_conf(orieConfPath.toStdString());
     }
 

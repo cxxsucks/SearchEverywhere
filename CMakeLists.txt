@@ -24,7 +24,7 @@ else(NOT SEEV_SYSTEM_ORIENT)
     find_package(orie REQUIRED)
 endif(NOT SEEV_SYSTEM_ORIENT)
 
-project(seev VERSION 0.3.1)
+project(seev VERSION 0.4.0)
 set(seev_src
     main.cc
     widgets/homepagewidget.cpp widgets/homepagewidget.hpp widgets/homepagewidget.ui

@@ -2,63 +2,35 @@
 <ui version="4.0">
  <class>seev::OrieConfWidget</class>
  <widget class="QWidget" name="seev::OrieConfWidget">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>405</width>
-    <height>720</height>
-   </rect>
-  </property>
   <property name="windowTitle">
    <string>Configuring `orient`</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="6" column="0">
-    <widget class="QPushButton" name="ssdRootAddBut">
-     <property name="text">
-      <string>Add</string>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="0" colspan="4">
-    <widget class="QListWidget" name="hddRootPathLst"/>
-   </item>
-   <item row="1" column="3">
-    <widget class="QPushButton" name="browseDbPath">
-     <property name="toolTip">
-      <string>Default one generally works.</string>
-     </property>
-     <property name="text">
-      <string>Browse</string>
-     </property>
-    </widget>
-   </item>
-   <item row="13" column="1">
+   <item row="9" column="1">
     <widget class="QPushButton" name="erasePrunedBut">
      <property name="text">
       <string>Erase</string>
      </property>
     </widget>
    </item>
-   <item row="4" column="0" colspan="4">
-    <widget class="QListWidget" name="ssdRootPathLst"/>
+   <item row="7" column="0" colspan="4">
+    <widget class="QListWidget" name="prunedPathLst"/>
    </item>
-   <item row="9" column="2" colspan="2">
-    <widget class="QPushButton" name="moveToSsdBut">
-     <property name="text">
-      <string>Move up, it is on SSD</string>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="1">
-    <widget class="QPushButton" name="hddRootEraseBut">
+   <item row="5" column="1">
+    <widget class="QPushButton" name="eraseSlowBut">
      <property name="text">
       <string>Erase</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="0">
+   <item row="10" column="0" colspan="4">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
     <widget class="QLabel" name="z_1">
      <property name="toolTip">
       <string>Default one generally works.</string>
@@ -71,89 +43,63 @@
      </property>
     </widget>
    </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="z_0">
-     <property name="text">
-      <string>SSD Root Paths</string>
-     </property>
-     <property name="buddy">
-      <cstring>ssdRootPathLst</cstring>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="1">
-    <widget class="QPushButton" name="ssdRootEraseBut">
-     <property name="text">
-      <string>Erase</string>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="0">
-    <widget class="QLabel" name="z_2">
-     <property name="text">
-      <string>HDD Root Paths</string>
-     </property>
-     <property name="buddy">
-      <cstring>hddRootPathLst</cstring>
-     </property>
-    </widget>
-   </item>
    <item row="9" column="0">
-    <widget class="QPushButton" name="hddRootAddBut">
-     <property name="text">
-      <string>Add</string>
-     </property>
-    </widget>
-   </item>
-   <item row="13" column="0">
     <widget class="QPushButton" name="addPrunedBut">
      <property name="text">
       <string>Add</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="0" colspan="4">
-    <widget class="QLabel" name="z_4">
-     <property name="text">
-      <string>Please make sure the HDD root paths are actually mounted on HDD disks, and so for SSD Root Paths. Mismatches may cause severe performance drops. If unsure, place all root paths on SSD.
-Root and ignored paths CAN overlap.</string>
+   <item row="0" column="3">
+    <widget class="QPushButton" name="browseDbPath">
+     <property name="toolTip">
+      <string>Default one generally works.</string>
      </property>
-     <property name="wordWrap">
-      <bool>true</bool>
+     <property name="text">
+      <string>Browse</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="1" colspan="2">
+   <item row="5" column="0">
+    <widget class="QPushButton" name="addSlowBut">
+     <property name="text">
+      <string>Add</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" colspan="2">
     <widget class="QLineEdit" name="dbPathEdit">
      <property name="toolTip">
       <string>Default one generally works.</string>
      </property>
     </widget>
    </item>
-   <item row="11" column="0" colspan="4">
-    <widget class="QListWidget" name="prunedPathLst"/>
+   <item row="4" column="0" colspan="4">
+    <widget class="QListWidget" name="slowPathLst"/>
    </item>
-   <item row="10" column="0">
+   <item row="6" column="0" colspan="4">
     <widget class="QLabel" name="z_3">
      <property name="text">
-      <string>Ignored Paths</string>
+      <string>Ignored Paths (Large, temporary or seldom used directories)</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
      <property name="buddy">
       <cstring>prunedPathLst</cstring>
      </property>
     </widget>
    </item>
-   <item row="6" column="2" colspan="2">
-    <widget class="QPushButton" name="moveToHddBut">
+   <item row="3" column="0" colspan="4">
+    <widget class="QLabel" name="z_2">
      <property name="text">
-      <string>Move down, it is on HDD</string>
+      <string>Slow Paths (Mount points of Spinning Disks (HDDs))</string>
      </property>
-    </widget>
-   </item>
-   <item row="14" column="0" colspan="4">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Ok</set>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+     <property name="buddy">
+      <cstring>slowPathLst</cstring>
      </property>
     </widget>
    </item>

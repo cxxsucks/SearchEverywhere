@@ -49,27 +49,35 @@ void OrieConfWidget::writeConfFile() const {
     static orie::fifo_thpool dummy_pool(0);
     orie::app writer(dummy_pool);
 
-    for (int i = 0; i < ui->ssdRootPathLst->count(); ++i) 
-        writer.add_root_path(ui->ssdRootPathLst->item(i)->text().toStdString(), true);
-    for (int i = 0; i < ui->hddRootPathLst->count(); ++i) 
-        writer.add_root_path(ui->hddRootPathLst->item(i)->text().toStdString(), false);
-    for (int i = 0; i < ui->prunedPathLst->count(); ++i) 
-        writer.add_ignored_path(ui->prunedPathLst->item(i)->text().toStdString());
-    writer.set_db_path(ui->dbPathEdit->text().toStdString())
-          .write_conf(m_confPath.toStdString());
+    // Hard-code indexing from root
+    try {
+        writer.set_db_path(ui->dbPathEdit->text().toStdString().c_str())
+              .set_root_path(orie::str_t(1, orie::separator));
+        for (int i = 0; i < ui->prunedPathLst->count(); ++i) 
+            writer.add_ignored_path(ui->prunedPathLst->item(i)->text().toStdString());
+        writer.write_conf(m_confPath.toStdString());
+    } catch (std::runtime_error&) {
+        QMessageBox::warning(nullptr, tr("Bad database file"), 
+            tr("No read permission to selected database file."));
+    }
 }
 
 void OrieConfWidget::readConfFile(const QString& path) {
     static orie::fifo_thpool dummy_pool(0);
     orie::app reader(dummy_pool);
 
-    reader.read_conf(path.toStdString());
-    ui->dbPathEdit->setText(QString::fromStdString(reader.db_path()));
-    for (const auto& [pathStr, isConcur] : reader.root_paths()) {
-        isConcur ? ui->ssdRootPathLst->addItem(QString::fromStdString(pathStr))
-                 : ui->hddRootPathLst->addItem(QString::fromStdString(pathStr));
+    try {
+        reader.read_conf(path.toStdString());
+    } catch(const std::runtime_error& e) {
+        qDebug() << path << " " << e.what();
+        qDebug() << tr("Using an empty one in config GUI.");
+        return;
     }
-    for (const auto& pathStr : reader.ignored_paths())
+    
+    ui->dbPathEdit->setText(QString::fromStdString(reader.db_path()));
+    for (const orie::str_t& slowPathStr : reader.slow_paths())
+        ui->slowPathLst->addItem(QString::fromStdString(slowPathStr));
+    for (const orie::str_t& pathStr : reader.ignored_paths())
         ui->prunedPathLst->addItem(QString::fromStdString(pathStr));
 }
 
@@ -79,26 +87,12 @@ OrieConfWidget::OrieConfWidget(const QString &orieConfPath, QWidget *parent)
     ui->setupUi(this);
     readConfFile(orieConfPath);
 
-    // Two "Move To" buttons
-    connect(ui->moveToHddBut, &QPushButton::clicked, this, [this] () {
-        ui->hddRootPathLst->addItem(
-            ui->ssdRootPathLst->takeItem(ui->ssdRootPathLst->currentRow())
-    ); });
-    connect(ui->moveToSsdBut, &QPushButton::clicked, this, [this] () {
-        ui->ssdRootPathLst->addItem(
-            ui->hddRootPathLst->takeItem(ui->hddRootPathLst->currentRow())
-    ); });
-
-    connect(ui->hddRootAddBut, &QPushButton::clicked,
-            std::bind(__selAndAddPath, ui->hddRootPathLst));
-    connect(ui->ssdRootAddBut, &QPushButton::clicked,
-            std::bind(__selAndAddPath, ui->ssdRootPathLst));
+    connect(ui->addSlowBut, &QPushButton::clicked,
+            std::bind(__selAndAddPath, ui->slowPathLst));
     connect(ui->addPrunedBut, &QPushButton::clicked,
             std::bind(__selAndAddPath, ui->prunedPathLst));
-    connect(ui->hddRootEraseBut, &QPushButton::clicked,
-            std::bind(__delCurPath, ui->hddRootPathLst));
-    connect(ui->ssdRootEraseBut, &QPushButton::clicked,
-            std::bind(__delCurPath, ui->ssdRootPathLst));
+    connect(ui->eraseSlowBut, &QPushButton::clicked,
+            std::bind(__delCurPath, ui->slowPathLst));
     connect(ui->erasePrunedBut, &QPushButton::clicked,
             std::bind(__delCurPath, ui->prunedPathLst));
     connect(ui->buttonBox, &QDialogButtonBox::accepted,
