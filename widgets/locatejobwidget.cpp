@@ -164,7 +164,7 @@ notFinished:
             datJobPair.second->start(m_orieApp._pool, 
                 [this] (orie::fs_data_iter& it) {
                     locResCallback(it);
-                }, jobSize, jobSize);
+                }, jobSize);
         }
         m_isSearching = false;
     });

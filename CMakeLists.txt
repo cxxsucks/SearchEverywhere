@@ -19,7 +19,7 @@ if (NOT SEEV_SYSTEM_ORIENT)
     include(FetchContent)
     FetchContent_Declare(orient
         GIT_REPOSITORY https://github.com/cxxsucks/orient
-        GIT_TAG master)
+        GIT_TAG 0.4.0)
     FetchContent_MakeAvailable(orient)
 else(NOT SEEV_SYSTEM_ORIENT)
     find_package(orie REQUIRED)
